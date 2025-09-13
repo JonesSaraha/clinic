@@ -1,10 +1,9 @@
-<!-- trigger rebuild -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrightSmile Dental Clinic - Your Trusted Dental Care Provider</title>
+    <title>BrightSmile Dental Clinic - Modern Dental Care</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -17,6 +16,11 @@
             --dark: #2d3748;
             --gray: #718096;
             --light-gray: #e2e8f0;
+            --white: #ffffff;
+            --light-green: hwb(164 62% 18%);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
         
         * {
@@ -26,25 +30,62 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Offset for sticky header */
+        }
+        
         body {
             color: var(--dark);
             line-height: 1.6;
-            background-color: #f8fafc;
+            background-color: var(--light-green);
+            overflow-x: hidden;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        #preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--light-gray);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         /* Header and Navigation */
         header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: box-shadow 0.3s ease;
         }
         
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -53,12 +94,17 @@
         .logo {
             display: flex;
             align-items: center;
+            text-decoration: none;
         }
         
         .logo i {
             font-size: 2rem;
             color: var(--primary);
             margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover i {
+            transform: rotate(15deg);
         }
         
         .logo-text {
@@ -74,6 +120,7 @@
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
         }
         
         nav li {
@@ -85,111 +132,163 @@
             color: var(--dark);
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
+            padding-bottom: 5px;
         }
-        
-        nav a:hover {
+
+        nav a:not(.nav-button)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary);
+            transition: all 0.3s ease-in-out;
+        }
+
+        nav a:hover:not(.nav-button) {
             color: var(--primary);
+        }
+
+        nav a:hover:not(.nav-button)::after {
+            width: 100%;
+            left: 0;
         }
         
         .nav-button {
             background: var(--primary);
-            color: white;
+            color: var(--white);
             padding: 0.6rem 1.2rem;
             border-radius: 30px;
             font-weight: 600;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
         
         .nav-button:hover {
             background: var(--primary-light);
-            color: white;
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(29, 53, 87, 0.8), rgba(29, 53, 87, 0.8)), url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 5rem 1rem;
+            background: linear-gradient(rgba(29, 53, 87, 0.85), rgba(29, 53, 87, 0.85)), url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            color: var(--white);
+            padding: 6rem 1.5rem;
             text-align: center;
         }
         
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .hero h1 {
-            font-size: 2.8rem;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             margin-bottom: 1rem;
+            font-weight: 700;
         }
         
         .hero p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             opacity: 0.9;
         }
         
         .hero-buttons {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
         
         .btn {
-            padding: 0.8rem 1.8rem;
+            padding: 0.9rem 2rem;
             border-radius: 30px;
             font-weight: 600;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            border: 2px solid transparent;
         }
         
         .btn-primary {
             background: var(--accent);
-            color: white;
+            color: var(--white);
         }
         
         .btn-primary:hover {
             background: var(--accent-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
         
         .btn-secondary {
             background: transparent;
-            color: white;
-            border: 2px solid white;
+            color: var(--white);
+            border-color: var(--white);
         }
         
         .btn-secondary:hover {
-            background: white;
+            background: var(--white);
             color: var(--secondary);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
         
         /* Section Styles */
         section {
-            padding: 5rem 1rem;
+            padding: 5rem 1.5rem;
+        }
+
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
         
         .section-title h2 {
-            font-size: 2.2rem;
+            font-size: clamp(2rem, 4vw, 2.5rem);
             color: var(--secondary);
             margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
         .section-title p {
             color: var(--gray);
             max-width: 700px;
-            margin: 0 auto;
+            margin: 2rem auto 0;
+            font-size: 1.1rem;
         }
         
         .container {
@@ -205,15 +304,16 @@
         }
         
         .service-card {
-            background: white;
-            border-radius: 10px;
+            background: var(--white);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .service-card:hover {
             transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
         
         .service-img {
@@ -224,17 +324,18 @@
         }
         
         .service-content {
-            padding: 1.5rem;
+            padding: 2rem;
         }
         
         .service-content h3 {
             color: var(--secondary);
             margin-bottom: 0.8rem;
+            font-size: 1.4rem;
         }
         
         .service-content p {
             color: var(--gray);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
         }
         
         .service-link {
@@ -246,8 +347,8 @@
         }
         
         .service-link i {
-            margin-left: 5px;
-            transition: transform 0.3s;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
         }
         
         .service-link:hover i {
@@ -256,20 +357,20 @@
         
         /* About Section */
         .about {
-            background-color: white;
+            background-color: var(--white);
         }
         
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
             align-items: center;
         }
         
         .about-image {
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
         }
         
         .about-image img {
@@ -279,6 +380,7 @@
         }
         
         .about-text h2 {
+            font-size: 2rem;
             color: var(--secondary);
             margin-bottom: 1.5rem;
         }
@@ -286,10 +388,6 @@
         .about-text p {
             margin-bottom: 1.5rem;
             color: var(--gray);
-        }
-        
-        .about-features {
-            margin-top: 2rem;
         }
         
         .feature {
@@ -300,30 +398,46 @@
         
         .feature i {
             color: var(--primary);
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-right: 1rem;
+            background-color: #e2f2f1;
+            padding: 8px;
+            border-radius: 50%;
         }
         
         /* Team Section */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
         
         .team-member {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .team-img-wrapper {
+            height: 300px;
+            overflow: hidden;
         }
         
         .team-img {
-            height: 300px;
-            background-color: var(--light-gray);
+            height: 100%;
             background-position: center;
             background-size: cover;
+            transition: transform 0.4s ease;
+        }
+        .team-member:hover .team-img {
+            transform: scale(1.05);
         }
         
         .team-info {
@@ -333,11 +447,19 @@
         .team-info h3 {
             color: var(--secondary);
             margin-bottom: 0.5rem;
+            font-size: 1.3rem;
         }
         
-        .team-info p {
-            color: var(--gray);
+        .team-info .team-role {
+            color: var(--primary);
+            font-weight: 600;
             margin-bottom: 1rem;
+        }
+        
+        .team-info p:not(.team-role) {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
         }
         
         .team-social {
@@ -349,18 +471,28 @@
         .team-social a {
             color: var(--primary);
             font-size: 1.2rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .team-social a:hover {
+            color: var(--accent-dark);
+            transform: scale(1.2);
         }
         
         /* Testimonials */
         .testimonials {
-            background: linear-gradient(to right, var(--primary-light), var(--primary));
-            color: white;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: var(--white);
         }
         
-        .testimonials .section-title h2 {
-            color: white;
+        .testimonials .section-title h2, 
+        .testimonials .section-title p {
+            color: var(--white);
         }
         
+        .testimonials .section-title h2::after {
+            background: var(--accent);
+        }
+
         .testimonials-container {
             max-width: 800px;
             margin: 0 auto;
@@ -368,14 +500,16 @@
         
         .testimonial {
             background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 2.5rem;
+            border-radius: 15px;
             margin-bottom: 2rem;
+            border-left: 5px solid var(--accent);
         }
         
         .testimonial-text {
             font-style: italic;
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
         
         .testimonial-author {
@@ -384,15 +518,18 @@
         }
         
         .author-img {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            background-color: white;
-            margin-right: 1rem;
+            margin-right: 1.5rem;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--accent);
         }
         
         .author-info h4 {
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1rem;
         }
         
         .author-info p {
@@ -403,37 +540,32 @@
         /* Contact Section */
         .contact-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1.2fr;
             gap: 3rem;
         }
         
         .contact-info {
             background: var(--secondary);
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-        }
-        
-        .contact-info h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
         }
         
         .contact-detail {
             display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            align-items: flex-start;
+            margin-bottom: 2rem;
         }
         
         .contact-detail i {
-            font-size: 1.2rem;
-            margin-right: 1rem;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
             color: var(--accent);
+            width: 30px;
+            text-align: center;
         }
         
-        .hours-list {
-            list-style: none;
-        }
+        .hours-list { list-style: none; }
         
         .hours-list li {
             display: flex;
@@ -441,42 +573,38 @@
             margin-bottom: 0.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
         }
         
         .contact-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
         }
         
-        .contact-form h3 {
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .form-group { margin-bottom: 1.5rem; }
         
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             color: var(--dark);
-            font-weight: 500;
+            font-weight: 600;
         }
         
         .form-control {
             width: 100%;
             padding: 0.8rem 1rem;
             border: 1px solid var(--light-gray);
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
         
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 127, 117, 0.2);
         }
         
         textarea.form-control {
@@ -486,24 +614,31 @@
         
         .submit-btn {
             background: var(--primary);
-            color: white;
+            color: var(--white);
             border: none;
-            padding: 0.8rem 1.8rem;
+            padding: 0.9rem 2rem;
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
         
         .submit-btn:hover {
             background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        #form-message {
+            margin-top: 1rem;
+            font-weight: 500;
         }
         
         /* Footer */
         footer {
             background: var(--secondary);
-            color: white;
-            padding: 3rem 1rem;
+            color: var(--white);
+            padding: 4rem 1.5rem 2rem;
         }
         
         .footer-container {
@@ -511,11 +646,11 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
         }
         
         .footer-col h4 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
             position: relative;
         }
@@ -526,36 +661,25 @@
             left: 0;
             bottom: -10px;
             width: 50px;
-            height: 2px;
+            height: 3px;
             background: var(--accent);
         }
         
-        .footer-col ul {
-            list-style: none;
-        }
-        
-        .footer-col ul li {
-            margin-bottom: 0.8rem;
-        }
-        
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
         .footer-col ul a {
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.3s, padding-left 0.3s;
         }
-        
         .footer-col ul a:hover {
-            color: white;
+            color: var(--white);
+            padding-left: 5px;
         }
         
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        
+        .footer-social { display: flex; gap: 1rem; margin-top: 1.5rem; }
         .footer-social a {
-            color: white;
+            color: var(--white);
             background: rgba(255, 255, 255, 0.1);
             width: 40px;
             height: 40px;
@@ -563,320 +687,62 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
-        
         .footer-social a:hover {
             background: var(--primary);
+            transform: translateY(-3px);
         }
         
         .copyright {
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 4rem;
             padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.6);
         }
         
-        /* Chat Widget */
-        .chat-widget {
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 99;
-        }
-        
-        .chat-button {
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: all 0.3s;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 9999;
         }
         
-        .chat-button i {
-            font-size: 1.5rem;
-        }
-        
-        .chat-button:hover {
-            transform: scale(1.1);
-        }
-        
-        .chat-wrapper {
-            width: 350px;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.5s ease;
-            position: absolute;
-            bottom: 70px;
-            right: 0;
-            display: none;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chat-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1.2rem;
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-        
-        .chat-header i {
-            font-size: 1.8rem;
-            margin-right: 10px;
-        }
-        
-        .chat-header-info h4 {
-            font-size: 1.2rem;
-            margin-bottom: 2px;
-        }
-        
-        .chat-header-info p {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-        
-        .status-indicator {
-            width: 10px;
-            height: 10px;
-            background-color: #4ade80;
-            border-radius: 50%;
-            position: absolute;
+        /* Scroll to Top Button */
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 90px;
             right: 20px;
-            bottom: 20px;
-        }
-        
-        .chat-messages {
-            padding: 1.2rem;
-            height: 350px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
-            background-size: 15px 15px;
-        }
-        
-        .message {
-            max-width: 80%;
-            padding: 0.8rem 1rem;
-            margin-bottom: 0.8rem;
-            border-radius: 18px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            animation: fadeIn 0.3s ease;
-            position: relative;
-        }
-        
-        .bot-message {
-            background-color: white;
-            color: var(--dark);
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--light-gray);
-        }
-        
-        .bot-message:before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 12px;
-            width: 0;
-            height: 0;
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            border-right: 8px solid white;
-        }
-        
-        .user-message {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 5px;
-            box-shadow: 0 2px 8px rgba(26, 127, 117, 0.3);
-        }
-        
-        .user-message:after {
-            content: '';
-            position: absolute;
-            right: -8px;
-            top: 12px;
-            width: 0;
-            height: 0;
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            border-left: 8px solid var(--primary);
-        }
-        
-        .chat-options {
-            padding: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            border-top: 1px solid var(--light-gray);
-            background-color: white;
-            transition: all 0.3s ease;
-            justify-content: center;
-        }
-        
-        .option-button {
-            padding: 0.8rem 1.2rem;
-            background: linear-gradient(to bottom, white, #f8fafc);
-            border: 1px solid var(--light-gray);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--dark);
-            font-weight: 500;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-        
-        .option-button:hover {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(26, 127, 117, 0.25);
-            border-color: var(--primary-light);
-        }
-        
-        .service-option {
-            background: linear-gradient(to bottom, white, #f8fafc);
-            border: 1px solid var(--primary-light);
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        .back-button {
-            background: linear-gradient(to bottom, #f1f5f9, #e2e8f0);
-            color: var(--gray);
-            border: 1px solid #cbd5e1;
-        }
-        
-        .back-button:hover {
-            background: linear-gradient(to bottom, #e2e8f0, #cbd5e1);
-            color: var(--dark);
-            box-shadow: 0 5px 12px rgba(100, 116, 139, 0.25);
-            border-color: #94a3b8;
-        }
-        
-        .action-button {
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            background-color: #333;
             color: white;
             border: none;
-            padding: 0.9rem 1.5rem;
-        }
-        
-        .action-button:hover {
-            background: linear-gradient(135deg, var(--accent-dark), #e76f51);
-            box-shadow: 0 5px 12px rgba(231, 111, 81, 0.3);
-        }
-        
-        /* Typing indicator */
-        .typing-indicator {
-            display: none;
-            background-color: white;
-            padding: 12px 16px;
-            border-radius: 18px;
-            align-self: flex-start;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--light-gray);
-        }
-        
-        .typing-indicator span {
-            height: 8px;
-            width: 8px;
-            float: left;
-            margin: 0 2px;
-            background-color: var(--gray);
-            display: block;
             border-radius: 50%;
-            opacity: 0.4;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            z-index: 9999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            align-items: center;
+            justify-content: center;
         }
-        
-        .typing-indicator span:nth-of-type(1) {
-            animation: typing 1s infinite;
-        }
-        
-        .typing-indicator span:nth-of-type(2) {
-            animation: typing 1s 0.33s infinite;
-        }
-        
-        .typing-indicator span:nth-of-type(3) {
-            animation: typing 1s 0.66s infinite;
-        }
-        
-        @keyframes typing {
-            0%, 100% { transform: translateY(0); opacity: 0.4; }
-            50% { transform: translateY(-5px); opacity: 0.8; }
-        }
-        
-        /* Chat footer */
-        .chat-footer {
-            padding: 0.8rem;
-            text-align: center;
-            background-color: #f1f5f9;
-            color: var(--gray);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--light-gray);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-            
-            nav ul {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .chat-wrapper {
-                width: 320px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 1rem;
-            }
-            
-            .chat-wrapper {
-                width: 300px;
-                right: -20px;
-            }
+
+        #scrollToTopBtn.show {
+            display: flex;
         }
         
         /* Mobile Menu */
@@ -887,78 +753,227 @@
             font-size: 1.5rem;
             color: var(--dark);
             cursor: pointer;
+            z-index: 101;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 1200px) {
+            .header-container, .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
         }
         
         @media (max-width: 992px) {
-            .mobile-menu-btn {
-                display: block;
+            .about-content, .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .mobile-menu-btn { 
+                display: block; 
             }
             
             nav ul {
                 position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: white;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--white);
                 flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                display: none;
+                padding: 6rem 2rem 2rem;
+                box-shadow: var(--shadow-lg);
+                transition: right 0.4s ease-in-out;
+                align-items: flex-start;
             }
             
-            nav ul.active {
-                display: flex;
+            nav ul.active { 
+                right: 0; 
             }
             
-            nav li {
-                margin: 1rem 0;
+            nav li { 
+                margin: 1rem 0; 
+                width: 100%; 
+            }
+            
+            nav a { 
+                padding: 1rem 0; 
+                display: block; 
+            }
+            
+            .nav-button { 
+                text-align: center; 
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-member {
+                flex-direction: column;
+            }
+            
+            .team-img {
+                width: 100%;
+                height: 300px;
             }
         }
         
-        /* Highlight for important information */
-        .highlight {
-            color: var(--primary);
-            font-weight: 600;
+        @media (max-width: 768px) {
+            html { 
+                scroll-padding-top: 70px; 
+            }
+            
+            .header-container, .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            
+            .hero { 
+                padding: 4rem 1.5rem; 
+            }
+            
+            .hero h1 { 
+                font-size: 2.2rem; 
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons { 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 1rem;
+            }
+            
+            .btn { 
+                width: 100%; 
+                text-align: center; 
+                padding: 0.8rem 1.5rem;
+            }
+            
+            section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .section-title {
+                margin-bottom: 2.5rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial {
+                padding: 1.5rem;
+            }
+            
+            .testimonial-author {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .author-img {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .whatsapp-float, #scrollToTopBtn {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            #scrollToTopBtn {
+                bottom: 85px;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
         }
         
-        .phone-number {
-            background-color: rgba(26, 127, 117, 0.1);
-            padding: 0.3rem 0.6rem;
-            border-radius: 5px;
-            font-weight: 600;
-        }
-        
-        .close-chat {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
+        @media (max-width: 576px) {
+            .header-container {
+                padding: 0.8rem 1rem;
+            }
+            
+            .logo i {
+                font-size: 1.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1rem;
+            }
+            
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 2rem 1rem;
+            }
+            
+            .service-content, .team-info {
+                padding: 1.5rem;
+            }
+            
+            nav ul {
+                width: 85%;
+            }
+            
+            .contact-detail {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .contact-detail i {
+                margin-bottom: 0.5rem;
+            }
+            
+            .footer-col h4 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+    
     <!-- Header -->
     <header>
         <div class="header-container">
-            <div class="logo">
+            <a href="#" class="logo">
                 <i class="fas fa-tooth"></i>
-                <div class="logo-text">Bright<span>Smile</span></div>
-            </div>
-            <button class="mobile-menu-btn">
+                <div class="logo-text">AARTHI PRIYAS TOOTH CARE CLINIC</div>
+            </a>
+            <button class="mobile-menu-btn" aria-label="Open menu">
                 <i class="fas fa-bars"></i>
             </button>
             <nav>
-                <ul>
+                <ul id="nav-menu">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
                     <li><a href="#team">Team</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#appointment" class="nav-button">Book Appointment</a></li>
+                    <li><a href="#contact" class="nav-button">Book Appointment</a></li>
                 </ul>
             </nav>
         </div>
@@ -968,110 +983,41 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Your Smile is Our Priority</h1>
-            <p>BrightSmile Dental Clinic provides comprehensive dental care for the whole family. Our experienced team offers personalized treatments in a comfortable environment.</p>
+            <p>Our mission is to provide quality dental care to our patients at affordable cost and satisfy the patient's as per their needs.</p>
             <div class="hero-buttons">
-                <a href="#appointment" class="btn btn-primary">Book an Appointment</a>
+                <a href="#contact" class="btn btn-primary">Book an Appointment</a>
                 <a href="#services" class="btn btn-secondary">Our Services</a>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services">
+    <section id="services" class="section-hidden">
         <div class="container">
             <div class="section-title">
                 <h2>Our Dental Services</h2>
                 <p>We offer a wide range of dental services to keep your smile healthy and beautiful.</p>
             </div>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('');"></div>
-                    <div class="service-content">
-                        <h3>Teeth Cleaning</h3>
-                        <p>Professional cleaning to remove plaque and tartar, helping prevent cavities and gum disease.</p>
-                        <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('');"></div>
-                    <div class="service-content">
-                        <h3>Dental Fillings</h3>
-                        <p>Tooth-colored fillings to restore teeth affected by cavities or minor damage.</p>
-                        <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('');"></div>
-                    <div class="service-content">
-                        <h3>Teeth Whitening</h3>
-                        <p>Professional whitening treatments to brighten your smile by several shades.</p>
-                        <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('');"></div>
-                    <div class="service-content">
-                        <h3>Dental Implants</h3>
-                        <p>Permanent solution for missing teeth that look, feel, and function like natural teeth.</p>
-                        <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('');"></div>
-                    <div class="service-content">
-                        <h3>Orthodontics</h3>
-                        <p>Traditional braces and clear aligners to correct teeth alignment and bite issues.</p>
-                        <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('');"></div>
-                    <div class="service-content">
-                        <h3>Root Canal Therapy</h3>
-                        <p>Painless treatment to save infected teeth while relieving pain and discomfort.</p>
-                        <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+                <!-- Service Cards will be added here via JS for animation staggering -->
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
+    <section class="about section-hidden" id="about">
         <div class="container">
             <div class="about-content">
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="BrightSmile Dental Clinic">
-                </div>
                 <div class="about-text">
-                    <h2>About BrightSmile Dental Clinic</h2>
-                    <p>BrightSmile Dental Clinic has been serving the community for over 15 years. Our mission is to provide exceptional dental care in a comfortable and welcoming environment.</p>
-                    <p>We utilize the latest dental technology and techniques to ensure our patients receive the highest standard of care. Our team of experienced dental professionals is dedicated to helping you achieve and maintain optimal oral health.</p>
-                    <div class="about-features">
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>State-of-the-art technology</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Comfortable and relaxing environment</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Personalized treatment plans</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Friendly and experienced staff</span>
-                        </div>
-                    </div>
-                </div>
+                    <h2>AARTHI PRIYAS TOOTH CARE CLINIC</h2>
+                    <p>AARTHIPRIYA TOOTH CARE CLINIC started in 2004 has more than 20 years of clinical excellence in advanced endodontic and implant surgeries. It carrier a pride of treating more than 20k customers with advanced high end equipments in a hygienic and patient's friendly environment.</p>
+                </div> 
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section id="team">
+    <section id="team" class="section-hidden">
         <div class="container">
             <div class="section-title">
                 <h2>Meet Our Dental Team</h2>
@@ -1079,51 +1025,37 @@
             </div>
             <div class="team-grid">
                 <div class="team-member">
-                    <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="team-img-wrapper">
+                        <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    </div>
                     <div class="team-info">
-                        <h3>Dr. Sarah Johnson</h3>
-                        <p>General Dentist</p>
-                        <p>With over 12 years of experience, Dr. Johnson specializes in preventive dentistry and cosmetic procedures.</p>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
+                        <h3>DR. RAVIKUMAR M.D.S</h3>
+                        <p class="team-role">Owner and Chief dentist</p>
+                        <p class="team-desc">
+                            DR. RAVIKUMAR M.D.S is the owner and chief dentist in Aarthi Priyas Tooth Care Clinic. 
+                            He has completed his M.D.S in Conservative and Endodontic at Ragas dental college in the year 2006. 
+                            He has more than 20 years of experience in Root canal treatments and painless endodontic surgeries. 
+                            He also has also a strong academic carrier and has trained a number of postgraduate students in endodontics. 
+                            He is currently a faculty of SRM DENTAL College.
+                        </p>
                     </div>
                 </div>
+
                 <div class="team-member">
-                    <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    <div class="team-info">
-                        <h3>Dr. Michael Chen</h3>
-                        <p>Orthodontist</p>
-                        <p>Dr. Chen is a certified orthodontist with expertise in traditional braces and clear aligner therapy.</p>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
+                    <div class="team-img-wrapper">
+                        <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
                     </div>
-                </div>
-                <div class="team-member">
-                    <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
                     <div class="team-info">
-                        <h3>Dr. Emily Rodriguez</h3>
-                        <p>Periodontist</p>
-                        <p>Dr. Rodriguez specializes in gum health and dental implants, with advanced training in periodontics.</p>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    <div class="team-info">
-                        <h3>Lisa Thompson</h3>
-                        <p>Dental Hygienist</p>
-                        <p>Lisa has been with BrightSmile for 8 years and is known for her gentle approach to teeth cleaning.</p>
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
+                        <h3>DR. MASSILLAMANI M.D.S</h3>
+                        <p class="team-role">Co-owner</p>
+                        <p class="team-desc">
+                            DR. MASSILLAMANI M.D.S is the Co-owner of Aarthi Priyas Tooth Care Clinic and has completed M.D.S in
+                            Oral Medicine & Radiology at Sri Ramachandra Dental College in 2009. She has both clinical and
+                            academic experience for more than 16 years. She has training in advanced imaging such as CBCT and
+                            C.T. Identification and treatment of cancer and precancerous lesions such as leukoplakia, lichen planus
+                            and oral submucous fibrosis. Management of chronic facial pain due to neuralgic, myofacial and
+                            temporomandibular joint disorders are her major priorities.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1131,7 +1063,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials">
+    <section class="testimonials section-hidden">
         <div class="container">
             <div class="section-title">
                 <h2>Patient Testimonials</h2>
@@ -1139,39 +1071,17 @@
             </div>
             <div class="testimonials-container">
                 <div class="testimonial">
-                    <div class="testimonial-text">
-                        "I've been coming to BrightSmile for years, and I wouldn't trust my dental care to anyone else. The staff is friendly, the office is clean, and Dr. Johnson is simply the best!"
-                    </div>
+                    <div class="testimonial-text">"I've been coming to BrightSmile for years, and I wouldn't trust my dental care to anyone else. The staff is friendly, the office is clean, and Dr. Johnson is simply the best!"</div>
                     <div class="testimonial-author">
-                        <div class="author-img"></div>
-                        <div class="author-info">
-                            <h4>Jennifer Williams</h4>
-                            <p>Patient since 2015</p>
-                        </div>
+                        <div class="author-img" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                        <div class="author-info"><h4>Jennifer Williams</h4><p>Patient since 2015</p></div>
                     </div>
                 </div>
                 <div class="testimonial">
-                    <div class="testimonial-text">
-                        "I used to dread going to the dentist until I found BrightSmile. They make every visit comfortable and stress-free. My teeth have never been healthier!"
-                    </div>
+                    <div class="testimonial-text">"I used to dread going to the dentist until I found BrightSmile. They make every visit comfortable and stress-free. My teeth have never been healthier!"</div>
                     <div class="testimonial-author">
-                        <div class="author-img"></div>
-                        <div class="author-info">
-                            <h4>Robert Martinez</h4>
-                            <p>Patient since 2018</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        "Dr. Chen transformed my smile with Invisalign. The process was smooth, and the results exceeded my expectations. I highly recommend BrightSmile for orthodontic treatment."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img"></div>
-                        <div class="author-info">
-                            <h4>Amanda Lee</h4>
-                            <p>Patient since 2020</p>
-                        </div>
+                        <div class="author-img" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                        <div class="author-info"><h4>Robert Martinez</h4><p>Patient since 2018</p></div>
                     </div>
                 </div>
             </div>
@@ -1179,81 +1089,31 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
+    <section id="contact" class="section-hidden">
         <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
-                <p>Reach out to us to schedule an appointment or ask any questions.</p>
-            </div>
+            <div class="section-title"><h2>Contact Us</h2><p>Reach out to us to schedule an appointment or ask any questions.</p></div>
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Get in Touch</h3>
-                    <div class="contact-detail">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Address</h4>
-                            <p>123 Dental Avenue, Smile City, SC 12345</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-phone-alt"></i>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>(555) 123-4567</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@brightsmile.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <h4>Office Hours</h4>
-                            <ul class="hours-list">
-                                <li><span>Monday - Friday</span> <span>8:00 AM - 6:00 PM</span></li>
-                                <li><span>Saturday</span> <span>9:00 AM - 3:00 PM</span></li>
-                                <li><span>Sunday</span> <span>Closed</span></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><div><h4>Address</h4><p>C5, PARAMOUNT PARK,<br>(DOCTORS PLAZA)
+SUPREME MOBILES UPSTAIRS.<br>
+VIJAYANAGAR JUNCTION<br>
+VELACHERY-TAMBARAM MAIN ROAD.<br>
+VELACHERY.</p></div></div>
+                    <div class="contact-detail"><i class="fas fa-phone-alt"></i><div><h4>Phone</h4><p>9444125488</p>
+                    <p>9362640004</p></div></div>
+                    <div class="contact-detail"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>aarthipriyas2004@gmail.com</p></div></div>
+                    <div class="contact-detail"><i class="fas fa-clock"></i><div><h4>Office Hours</h4><ul class="hours-list"><li><span>Monday - Friday</span> <span>8AM - 6PM</span></li><li><span>Saturday</span> <span>9AM - 3PM</span></li><li><span>Sunday</span> <span>Closed</span></li></ul></div></div>
                 </div>
                 <div class="contact-form">
                     <h3>Send Us a Message</h3>
                     <form id="appointmentForm">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service Interested In</label>
-                            <select id="service" class="form-control" required>
-                                <option value="">Select a service</option>
-                                <option value="cleaning">Teeth Cleaning</option>
-                                <option value="filling">Dental Fillings</option>
-                                <option value="whitening">Teeth Whitening</option>
-                                <option value="implants">Dental Implants</option>
-                                <option value="orthodontics">Orthodontics</option>
-                                <option value="rootcanal">Root Canal Therapy</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" class="form-control" required></textarea>
-                        </div>
+                        <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" class="form-control" required></div>
+                        <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" class="form-control" required></div>
+                        <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" class="form-control" required></div>
+                        <div class="form-group"><label for="message">Message</label><textarea id="message" class="form-control" required></textarea></div>
                         <button type="submit" class="submit-btn">Send Message</button>
+                        <p id="form-message"></p>
                     </form>
                 </div>
             </div>
@@ -1264,334 +1124,142 @@
     <footer>
         <div class="footer-container">
             <div class="footer-col">
-                <h4>BrightSmile Dental Clinic</h4>
+                <h4>AARTHI PRIYAS TOOTH CARE CLINIC</h4>
                 <p>Providing quality dental care for the whole family in a comfortable and welcoming environment.</p>
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
             </div>
             <div class="footer-col">
                 <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#team">Our Team</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                </ul>
+                <ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#team">Team</a></li></ul>
             </div>
             <div class="footer-col">
                 <h4>Our Services</h4>
-                <ul>
-                    <li><a href="#">Teeth Cleaning</a></li>
-                    <li><a href="#">Dental Fillings</a></li>
-                    <li><a href="#">Teeth Whitening</a></li>
-                    <li><a href="#">Dental Implants</a></li>
-                    <li><a href="#">Orthodontics</a></li>
-                </ul>
-            </div>
+                <ul><li><a href="#services">ROOT CANAL TREATMENT</a></li><li><a href="#services">IMPLANTS</a></li><li><a href="#services">ALIGNERS</a></li><li><a href="#services">BRACES.</a></li></ul>
+            </div> 
             <div class="footer-col">
                 <h4>Contact Info</h4>
                 <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> 123 Dental Avenue, Smile City, SC 12345</li>
-                    <li><i class="fas fa-phone-alt"></i> (555) 123-4567</li>
-                    <li><i class="fas fa-envelope"></i> info@brightsmile.com</li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i><br>
+                        AARTHIPRIYAS TOOTH CARE CLINIC,<br>
+                        C5, PARAMOUNT PARK, (SUPREME MOBILE UPSTAIRS)<br>
+                        VIJAYANAGAR,<br>
+                        VELACHERY-TAMBARAM MAIN ROAD,<br>
+                        VELACHERY-600091.<br>
+                        CHENNAI.
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt"></i>  9444125488 <br>
+                        <i class="fas fa-phone-alt"></i>  9362640004
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i> aarthipriyas2004@gmail.com
+                    </li>
                 </ul>
             </div>
         </div>
-        <div class="copyright">
-            <p>&copy; 2023 BrightSmile Dental Clinic. All rights reserved.</p>
-        </div>
     </footer>
 
-    <!-- Chat Widget -->
-    <div class="chat-widget">
-        <div class="chat-button" id="chatButton">
-            <i class="fas fa-comment-dots"></i>
-        </div>
-        <div class="chat-wrapper" id="chatWrapper">
-            <div class="chat-header">
-                <button class="close-chat" id="closeChat">
-                    <i class="fas fa-times"></i>
-                </button>
-                <i class="fas fa-tooth"></i>
-                <div class="chat-header-info">
-                    <h4>BrightSmile Assistant</h4>
-                    <p>We're here to help you!</p>
-                </div>
-                <div class="status-indicator"></div>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="message bot-message">
-                    Hello! Welcome to BrightSmile Dental Clinic. How can I help you today?
-                </div>
-            </div>
-            <div class="chat-options" id="chatOptions">
-                <button class="option-button" data-option="appointment">Book an Appointment</button>
-                <button class="option-button" data-option="services">Our Services</button>
-                <button class="option-button" data-option="hours">Office Hours</button>
-                <button class="option-button" data-option="contact">Contact Information</button>
-            </div>
-            <div class="typing-indicator" id="typingIndicator">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="chat-footer">
-                BrightSmile Dental Clinic &copy; 2023
-            </div>
-        </div>
-    </div>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919444125488" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-        
-        // Form submission
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will contact you shortly to confirm your appointment.');
-            this.reset();
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-        
-        // Chat functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const chatButton = document.getElementById('chatButton');
-            const chatWrapper = document.getElementById('chatWrapper');
-            const closeChat = document.getElementById('closeChat');
-            const chatMessages = document.getElementById('chatMessages');
-            const chatOptions = document.getElementById('chatOptions');
-            const typingIndicator = document.getElementById('typingIndicator');
             
-            // Toggle chat window
-            chatButton.addEventListener('click', function() {
-                chatWrapper.style.display = chatWrapper.style.display === 'block' ? 'none' : 'block';
+            // --- Preloader ---
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                preloader.classList.add('loaded');
             });
-            
-            closeChat.addEventListener('click', function() {
-                chatWrapper.style.display = 'none';
+
+            // --- Service Card Data & Population ---
+            const servicesData = [
+                { title: 'ROOT CANAL TREATMENT', desc: 'Professional cleaning to remove plaque and tartar, helping prevent cavities and gum disease.', img: 'https://images.unsplash.com/photo-1606214223682-16217ac5e219?auto=format&fit=crop&w=400&q=80' },
+                { title: 'IMPLANTS', desc: 'Tooth-colored fillings to restore teeth affected by cavities or minor damage.', img: 'https://images.unsplash.com/photo-1619451999298-50344837581b?auto=format&fit=crop&w=400&q=80' },
+                { title: 'ALIGNERS', desc: 'Professional whitening treatments to brighten your smile by several shades.', img: 'https://images.unsplash.com/photo-1629424992096-518359194917?auto=format&fit=crop&w=400&q=80' },
+                { title: 'BRACES.', desc: 'Permanent solution for missing teeth that look, feel, and function like natural teeth.', img: 'https://images.unsplash.com/photo-1629425733943-e478958688a5?auto=format&fit=crop&w=400&q=80' },
+                { title: 'TOOTH WHITENERS.', desc: 'Traditional braces and clear aligners to correct teeth alignment and bite issues.', img: 'https://images.unsplash.com/photo-1599056673859-9d2a71d5308b?auto=format&fit=crop&w=400&q=80' },
+                { title: 'SCALIING AND POLISHING.', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
+                { title: 'CROWN AND BRIDGES..', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
+                { title: 'EXTRACTION AND IMPACTION REMOVAL.', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
+                { title: 'ORAL CANCER SCREENING AND PREVENTION.', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
+                { title: 'TREATMENT OF TEMPOROMANDIBULAR JOINT DISORDERS.', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
+            ];
+
+            const servicesGrid = document.querySelector('.services-grid');
+            servicesData.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.innerHTML = `
+                    <div class="service-img" style="background-image: url('${service.img}');"></div>
+                    <div class="service-content">
+                        <h3>${service.title}</h3>
+                        <p>${service.desc}</p>
+                    </div>
+                `;
+                servicesGrid.appendChild(card);
             });
-            
-            // Option buttons handler
-            chatOptions.querySelectorAll('.option-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const option = this.getAttribute('data-option');
-                    addUserMessage(this.textContent);
-                    
-                    // Show typing indicator
-                    showTypingIndicator();
-                    
-                    setTimeout(() => {
-                        hideTypingIndicator();
-                        handleOptionSelection(option);
-                    }, 1000);
+
+            // --- Mobile Menu ---
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+            const menuIcon = mobileMenuBtn.querySelector('i');
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuIcon.classList.toggle('fa-bars');
+                menuIcon.classList.toggle('fa-times');
+            });
+            document.querySelectorAll('#nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        menuIcon.classList.add('fa-bars');
+                        menuIcon.classList.remove('fa-times');
+                    }
                 });
             });
+
+            // --- Form Submission ---
+            const appointmentForm = document.getElementById('appointmentForm');
+            const formMessage = document.getElementById('form-message');
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                formMessage.textContent = 'Thank you! Your message has been sent successfully.';
+                formMessage.style.color = 'var(--primary)';
+                this.reset();
+                setTimeout(() => formMessage.textContent = '', 4000);
+            });
             
-            function addUserMessage(message) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message', 'user-message');
-                messageElement.textContent = message;
-                chatMessages.appendChild(messageElement);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
+            // --- Scroll Animations ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.section-hidden').forEach(section => {
+                observer.observe(section);
+            });
             
-            function addBotMessage(message) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message', 'bot-message');
-                
-                // Format message with highlights for phone numbers
-                const formattedMessage = message.replace(/(\(\d{3}\) \d{3}-\d{4})/g, '<span class="phone-number">$1</span>');
-                messageElement.innerHTML = formattedMessage;
-                
-                chatMessages.appendChild(messageElement);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            function showTypingIndicator() {
-                typingIndicator.style.display = 'block';
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            function hideTypingIndicator() {
-                typingIndicator.style.display = 'none';
-            }
-            
-            function handleOptionSelection(option) {
-                switch(option) {
-                    case 'appointment':
-                        addBotMessage("To book an appointment, please call us at <span class='highlight'>(555) 123-4567</span>. Our receptionists will be happy to assist you in scheduling your visit.");
-                        showAppointmentOptions();
-                        break;
-                    case 'services':
-                        addBotMessage("We offer a wide range of dental services. Which one would you like to know more about?");
-                        showServiceOptions();
-                        break;
-                    case 'contact':
-                        addBotMessage("You can reach us at:<br>📞 Phone: <span class='highlight'>(555) 123-4567</span><br>🏢 Address: 123 Dental Avenue, Smile City, SC 12345");
-                        showMainOptions();
-                        break;
-                    case 'hours':
-                        addBotMessage("Our office hours are:<br>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 3:00 PM<br>Sunday: Closed");
-                        showMainOptions();
-                        break;
+            // --- Scroll to Top Button ---
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
                 }
-            }
-            
-            function showServiceOptions() {
-                chatOptions.innerHTML = `
-                    <button class="option-button service-option" data-option="cleaning">Teeth Cleaning</button>
-                    <button class="option-button service-option" data-option="filling">Fillings</button>
-                    <button class="option-button service-option" data-option="braces">Braces</button>
-                    <button class="option-button service-option" data-option="whitening">Teeth Whitening</button>
-                    <button class="option-button service-option" data-option="rootcanal">Root Canal</button>
-                    <button class="option-button service-option" data-option="implants">Dental Implants</button>
-                    <button class="option-button back-button" data-option="back">Back to Main</button>
-                `;
-                
-                // Add event listeners to new buttons
-                chatOptions.querySelectorAll('.option-button').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const option = this.getAttribute('data-option');
-                        
-                        if (option === 'back') {
-                            addUserMessage("Back to main menu");
-                            showTypingIndicator();
-                            setTimeout(() => {
-                                hideTypingIndicator();
-                                addBotMessage("What else can I help you with?");
-                                showMainOptions();
-                            }, 1000);
-                            return;
-                        }
-                        
-                        addUserMessage(this.textContent);
-                        showTypingIndicator();
-                        
-                        setTimeout(() => {
-                            hideTypingIndicator();
-                            handleServiceSelection(option);
-                        }, 1000);
-                    });
-                });
-            }
-            
-            function showAppointmentOptions() {
-                chatOptions.innerHTML = `
-                    <button class="option-button action-button" data-option="call">Call Now</button>
-                    <button class="option-button back-button" data-option="back">Back to Main</button>
-                `;
-                
-                // Add event listeners to new buttons
-                chatOptions.querySelectorAll('.option-button').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const option = this.getAttribute('data-option');
-                        
-                        if (option === 'back') {
-                            addUserMessage("Back to main menu");
-                            showTypingIndicator();
-                            setTimeout(() => {
-                                hideTypingIndicator();
-                                addBotMessage("What else can I help you with?");
-                                showMainOptions();
-                            }, 1000);
-                            return;
-                        }
-                        
-                        if (option === 'call') {
-                            addUserMessage("Call now");
-                            showTypingIndicator();
-                            setTimeout(() => {
-                                hideTypingIndicator();
-                                addBotMessage("Perfect! Our phone line is <span class='highlight'>(555) 123-4567</span>. We look forward to helping you schedule your appointment!");
-                                showMainOptions();
-                            }, 1000);
-                        }
-                    });
-                });
-            }
-            
-            function handleServiceSelection(service) {
-                let info = '';
-                switch(service) {
-                    case 'cleaning':
-                        info = "Our professional teeth cleaning service removes plaque and tartar buildup, helping prevent cavities and gum disease. We recommend cleanings every 6 months for optimal oral health.";
-                        break;
-                    case 'filling':
-                        info = "We use tooth-colored composite fillings to restore teeth affected by cavities. The procedure is quick, comfortable, and the results are virtually invisible.";
-                        break;
-                    case 'braces':
-                        info = "We offer traditional braces and clear aligners to correct teeth alignment issues. Our orthodontist will create a personalized treatment plan for your perfect smile.";
-                        break;
-                    case 'whitening':
-                        info = "Our professional teeth whitening can brighten your smile by up to 8 shades in just one visit. We also offer take-home kits for gradual whitening.";
-                        break;
-                    case 'rootcanal':
-                        info = "Root canal therapy relieves pain from infected teeth while preserving your natural tooth. The procedure is performed with precision and comfort in mind.";
-                        break;
-                    case 'implants':
-                        info = "Dental implants are the gold standard for replacing missing teeth. They look, feel, and function like natural teeth and can last a lifetime with proper care.";
-                        break;
-                }
-                
-                addBotMessage(info);
-                
-                // Ask follow-up question
-                setTimeout(() => {
-                    addBotMessage("Would you like to know about any other service or book an appointment?");
-                    showServiceOptions();
-                }, 300);
-            }
-            
-            function showMainOptions() {
-                chatOptions.innerHTML = `
-                    <button class="option-button" data-option="appointment">Book an Appointment</button>
-                    <button class="option-button" data-option="services">Our Services</button>
-                    <button class="option-button" data-option="hours">Office Hours</button>
-                    <button class="option-button" data-option="contact">Contact Information</button>
-                `;
-                
-                // Add event listeners to new buttons
-                chatOptions.querySelectorAll('.option-button').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const option = this.getAttribute('data-option');
-                        addUserMessage(this.textContent);
-                        
-                        showTypingIndicator();
-                        
-                        setTimeout(() => {
-                            hideTypingIndicator();
-                            handleOptionSelection(option);
-                        }, 1000);
-                    });
-                });
-            }
+            });
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         });
     </script>
 </body>
