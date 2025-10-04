@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrightSmile Dental Clinic - Modern Dental Care</title>
+    <title>AARTHI PRIYAS TOOTH CARE CLINIC - Modern Dental Care</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -17,10 +17,11 @@
             --gray: #718096;
             --light-gray: #e2e8f0;
             --white: #ffffff;
-            --light-green: hwb(164 62% 18%);
+            --light-green: #e0f2f1;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-light));
         }
         
         * {
@@ -32,7 +33,7 @@
         
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 80px; /* Offset for sticky header */
+            scroll-padding-top: 80px;
         }
         
         body {
@@ -54,6 +55,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
         }
         #preloader.loaded {
@@ -67,9 +69,15 @@
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin-bottom: 15px;
         }
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+        .preloader-text {
+            color: var(--primary);
+            font-weight: 500;
+            letter-spacing: 1px;
         }
         
         /* Header and Navigation */
@@ -79,7 +87,12 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            transition: box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        
+        .header-scrolled {
+            box-shadow: var(--shadow-md);
+            padding: 0.3rem 0;
         }
         
         .header-container {
@@ -173,41 +186,93 @@
             box-shadow: var(--shadow-md);
         }
         
+        /* --- Banner Styles --- */
+        .banner {
+            width: 100%;
+            position: relative; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            line-height: 0;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            z-index: -1;
+        }
+
+        .banner::after, .banner-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .banner::after {
+            content: '';
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .banner-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        .banner h1 {
+            font-size: 4rem;
+            margin: 0 0 1rem 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            line-height: 1.2;
+        }
+
+        .banner p {
+            font-size: 1.8rem;
+            margin: 0;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            font-weight: 300;
+        }
+        
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(29, 53, 87, 0.85), rgba(29, 53, 87, 0.85)), url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-            color: var(--white);
-            padding: 6rem 1.5rem;
+            padding: 4rem 1.5rem;
             text-align: center;
+            background: var(--light-green);
         }
         
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
         }
         
         .hero p {
             font-size: 1.2rem;
+            color: var(--gray);
             margin-bottom: 2.5rem;
-            opacity: 0.9;
         }
         
         .hero-buttons {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
+            flex-wrap: wrap;
         }
         
         .btn {
@@ -219,6 +284,8 @@
             transition: all 0.3s ease;
             box-shadow: var(--shadow-md);
             border: 2px solid transparent;
+            text-align: center;
+            min-width: 180px;
         }
         
         .btn-primary {
@@ -233,14 +300,12 @@
         }
         
         .btn-secondary {
-            background: transparent;
+            background: var(--primary);
             color: var(--white);
-            border-color: var(--white);
         }
         
         .btn-secondary:hover {
-            background: var(--white);
-            color: var(--secondary);
+            background: var(--primary-light);
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
         }
@@ -309,6 +374,7 @@
             overflow: hidden;
             box-shadow: var(--shadow-md);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
         
         .service-card:hover {
@@ -321,6 +387,11 @@
             background-color: var(--light-gray);
             background-position: center;
             background-size: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-card:hover .service-img {
+            transform: scale(1.05);
         }
         
         .service-content {
@@ -354,10 +425,46 @@
         .service-link:hover i {
             transform: translateX(5px);
         }
+
+        .service-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
         
         /* About Section */
         .about {
             background-color: var(--white);
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--light-green), transparent);
+            z-index: 1;
+        }
+
+        .about::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--light-green), transparent);
+            z-index: 1;
         }
         
         .about-content {
@@ -365,18 +472,14 @@
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
         
         .about-image {
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
         }
         
         .about-text h2 {
@@ -404,7 +507,91 @@
             padding: 8px;
             border-radius: 50%;
         }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light-green);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            color: var(--secondary);
+            font-weight: 600;
+        }
         
+        /* --- NEW SLIDER STYLES START --- */
+        #about-slider-container {
+            position: relative; /* Needed for positioning slides and dots */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            /* This ensures the container has the correct aspect ratio before images load */
+            padding-top: 66.66%; /* Adjust this percentage based on your image aspect ratio (e.g., for 3:2 images) */
+            background-color: var(--light-gray);
+        }
+
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures images fill the container without distortion */
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out; /* Smooth fade effect */
+            display: block;
+        }
+
+        .slider-image.active {
+            opacity: 1; /* Makes the current image visible */
+        }
+
+        .slider-dots-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 5;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-dot:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .slider-dot.active {
+            background-color: var(--white);
+        }
+        /* --- NEW SLIDER STYLES END --- */
+
+
         /* Team Section */
         .team-grid {
             display: grid;
@@ -419,6 +606,7 @@
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
+            position: relative;
         }
         .team-member:hover {
             transform: translateY(-10px);
@@ -428,6 +616,7 @@
         .team-img-wrapper {
             height: 300px;
             overflow: hidden;
+            position: relative;
         }
         
         .team-img {
@@ -438,6 +627,22 @@
         }
         .team-member:hover .team-img {
             transform: scale(1.05);
+        }
+
+        .team-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 1rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-member:hover .team-overlay {
+            opacity: 1;
         }
         
         .team-info {
@@ -482,6 +687,20 @@
         .testimonials {
             background: linear-gradient(135deg, var(--primary-light), var(--primary));
             color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.05"><text x="50%" y="50%" font-size="80" text-anchor="middle" dominant-baseline="middle" fill="white">❝</text></svg>');
+            background-repeat: repeat;
+            opacity: 0.1;
         }
         
         .testimonials .section-title h2, 
@@ -504,12 +723,27 @@
             border-radius: 15px;
             margin-bottom: 2rem;
             border-left: 5px solid var(--accent);
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
         }
         
         .testimonial-text {
             font-style: italic;
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
         }
         
         .testimonial-author {
@@ -536,6 +770,11 @@
             opacity: 0.8;
             font-size: 0.9rem;
         }
+
+        .testimonial-rating {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
         
         /* Contact Section */
         .contact-container {
@@ -549,12 +788,27 @@
             color: var(--white);
             padding: 2.5rem;
             border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><path d="M10,10 L90,10 L90,90 L10,90 Z" stroke="white" fill="none" stroke-width="2" /></svg>');
+            background-repeat: repeat;
         }
         
         .contact-detail {
             display: flex;
             align-items: flex-start;
             margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
         }
         
         .contact-detail i {
@@ -622,6 +876,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .submit-btn:hover {
@@ -633,12 +890,37 @@
             margin-top: 1rem;
             font-weight: 500;
         }
+
+        .map-container {
+            margin-top: 3rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            display: block;
+        }
         
         /* Footer */
         footer {
             background: var(--secondary);
             color: var(--white);
             padding: 4rem 1.5rem 2rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
         }
         
         .footer-container {
@@ -719,6 +1001,12 @@
             text-decoration: none;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             z-index: 9999;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         
         /* Scroll to Top Button */
@@ -726,7 +1014,7 @@
             position: fixed;
             bottom: 90px;
             right: 20px;
-            background-color: #333;
+            background-color: var(--primary);
             color: white;
             border: none;
             border-radius: 50%;
@@ -739,6 +1027,12 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
         }
 
         #scrollToTopBtn.show {
@@ -754,6 +1048,16 @@
             color: var(--dark);
             cursor: pointer;
             z-index: 101;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: var(--light-gray);
         }
         
         /* Mobile Responsiveness */
@@ -771,7 +1075,7 @@
             }
             
             .mobile-menu-btn { 
-                display: block; 
+                display: flex; 
             }
             
             nav ul {
@@ -818,6 +1122,18 @@
                 width: 100%;
                 height: 300px;
             }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .banner h1 {
+                font-size: 3.5rem;
+            }
+            
+            .banner p {
+                font-size: 1.6rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -831,11 +1147,11 @@
             }
             
             .hero { 
-                padding: 4rem 1.5rem; 
+                padding: 3rem 1.5rem; 
             }
             
             .hero h1 { 
-                font-size: 2.2rem; 
+                font-size: 2rem; 
             }
             
             .hero p {
@@ -850,6 +1166,7 @@
             
             .btn { 
                 width: 100%; 
+                max-width: 300px;
                 text-align: center; 
                 padding: 0.8rem 1.5rem;
             }
@@ -901,6 +1218,14 @@
             .logo-text {
                 font-size: 1.2rem;
             }
+            
+            .banner h1 {
+                font-size: 2.8rem;
+            }
+            
+            .banner p {
+                font-size: 1.4rem;
+            }
         }
         
         @media (max-width: 576px) {
@@ -917,7 +1242,7 @@
             }
             
             .hero {
-                padding: 3rem 1rem;
+                padding: 2rem 1rem;
             }
             
             .hero h1 {
@@ -948,12 +1273,53 @@
             .footer-col h4 {
                 font-size: 1.1rem;
             }
+
+            .testimonial::before {
+                font-size: 3rem;
+                top: 15px;
+                left: 15px;
+            }
+            
+            .banner h1 {
+                font-size: 2.2rem;
+            }
+            
+            .banner p {
+                font-size: 1.2rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+            
+            #scrollToTopBtn {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .banner h1 {
+                font-size: 1.8rem;
+            }
+            
+            .banner p {
+                font-size: 1rem;
+            }
+            
+            .logo-text {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
     <div id="preloader">
         <div class="spinner"></div>
+        <p class="preloader-text">Loading Your Bright Smile...</p>
     </div>
     
     <!-- Header -->
@@ -972,18 +1338,23 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#team">Team</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact" class="nav-button">Book Appointment</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+<!-- Fixed Banner Section -->
+<div class="banner" id="home">
+    <img src="photos/banner.jpg" alt="Aarthi Priyas Tooth Care Clinic" class="banner-img">
+</div>
+
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="hero-content">
-            <h1>Your Smile is Our Priority</h1>
-            <p>Our mission is to provide quality dental care to our patients at affordable cost and satisfy the patient's as per their needs.</p>
+            <h1>Welcome to Your Dental Health Partner</h1>
+            <p>Experience world-class dental care with our state-of-the-art facilities and expert dental professionals.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary">Book an Appointment</a>
                 <a href="#services" class="btn btn-secondary">Our Services</a>
@@ -1010,8 +1381,53 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>AARTHI PRIYAS TOOTH CARE CLINIC</h2>
-                    <p>AARTHIPRIYA TOOTH CARE CLINIC started in 2004 has more than 20 years of clinical excellence in advanced endodontic and implant surgeries. It carrier a pride of treating more than 20k customers with advanced high end equipments in a hygienic and patient's friendly environment.</p>
+                    <p>AARTHIPRIYA TOOTH CARE CLINIC started in 2004 has more than 20 years of clinical excellence in advanced endodontic and implant surgeries. It carries a pride of treating more than 20k customers with advanced high end equipments in a hygienic and patient's friendly environment.</p>
+                    
+                    <div class="feature">
+                        <i class="fas fa-award"></i>
+                        <div>
+                            <h4>20+ Years of Experience</h4>
+                            <p>Trusted dental care since 2004</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h4>20,000+ Patients Treated</h4>
+                            <p>Providing quality care to our community</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-stethoscope"></i>
+                        <div>
+                            <h4>Advanced Technology</h4>
+                            <p>State-of-the-art equipment for precise treatment</p>
+                        </div>
+                    </div>
+
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-text">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">20K+</div>
+                            <div class="stat-text">Happy Patients</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-text">Services</div>
+                        </div>
+                    </div>
                 </div> 
+                
+                <!-- This is the container for the new image slider -->
+                <div id="about-slider-container" class="about-image">
+                    <!-- Images and navigation dots will be generated and inserted here by JavaScript -->
+                </div>
+
             </div>
         </div>
     </section>
@@ -1025,9 +1441,11 @@
             </div>
             <div class="team-grid">
                 <div class="team-member">
-                    <div class="team-img-wrapper">
-                        <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    </div>
+                    <!-- CORRECTED CODE -->
+<div class="team-img-wrapper">
+    <div class="team-img" style="background-image: url('photos/doc1.jpg');"></div>
+    <div class="team-overlay">M.D.S in Conservative and Endodontic</div>
+</div>
                     <div class="team-info">
                         <h3>DR. RAVIKUMAR M.D.S</h3>
                         <p class="team-role">Owner and Chief dentist</p>
@@ -1035,16 +1453,22 @@
                             DR. RAVIKUMAR M.D.S is the owner and chief dentist in Aarthi Priyas Tooth Care Clinic. 
                             He has completed his M.D.S in Conservative and Endodontic at Ragas dental college in the year 2006. 
                             He has more than 20 years of experience in Root canal treatments and painless endodontic surgeries. 
-                            He also has also a strong academic carrier and has trained a number of postgraduate students in endodontics. 
+                            He also has a strong academic career and has trained a number of postgraduate students in endodontics. 
                             He is currently a faculty of SRM DENTAL College.
                         </p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="team-member">
                     <div class="team-img-wrapper">
-                        <div class="team-img" style="background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    </div>
+    <div class="team-img" style="background-image: url('photos/doc2.jpg');"></div>
+    <div class="team-overlay">M.D.S in Conservative and Endodontic</div>
+</div>
                     <div class="team-info">
                         <h3>DR. MASSILLAMANI M.D.S</h3>
                         <p class="team-role">Co-owner</p>
@@ -1056,6 +1480,11 @@
                             and oral submucous fibrosis. Management of chronic facial pain due to neuralgic, myofacial and
                             temporomandibular joint disorders are her major priorities.
                         </p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1063,22 +1492,36 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials section-hidden">
+    <section class="testimonials section-hidden" id="testimonials">
         <div class="container">
             <div class="section-title">
                 <h2>Patient Testimonials</h2>
-                <p>Hear what our patients have to say about their experience at BrightSmile Dental Clinic.</p>
+                <p>Hear what our patients have to say about their experience at our clinic.</p>
             </div>
             <div class="testimonials-container">
                 <div class="testimonial">
-                    <div class="testimonial-text">"I've been coming to BrightSmile for years, and I wouldn't trust my dental care to anyone else. The staff is friendly, the office is clean, and Dr. Johnson is simply the best!"</div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-text">"I've been coming to Aarthi Priyas for years, and I wouldn't trust my dental care to anyone else. The staff is friendly, the office is clean, and Dr. Ravikumar is simply the best!"</div>
                     <div class="testimonial-author">
                         <div class="author-img" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
                         <div class="author-info"><h4>Jennifer Williams</h4><p>Patient since 2015</p></div>
                     </div>
                 </div>
                 <div class="testimonial">
-                    <div class="testimonial-text">"I used to dread going to the dentist until I found BrightSmile. They make every visit comfortable and stress-free. My teeth have never been healthier!"</div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-text">"I used to dread going to the dentist until I found Aarthi Priyas. They make every visit comfortable and stress-free. My teeth have never been healthier!"</div>
                     <div class="testimonial-author">
                         <div class="author-img" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
                         <div class="author-info"><h4>Robert Martinez</h4><p>Patient since 2018</p></div>
@@ -1102,6 +1545,8 @@ VELACHERY-TAMBARAM MAIN ROAD.<br>
 VELACHERY.</p></div></div>
                     <div class="contact-detail"><i class="fas fa-phone-alt"></i><div><h4>Phone</h4><p>9444125488</p>
                     <p>9362640004</p></div></div>
+                    <div class="contact-detail"><i class="fab fa-whatsapp"></i><div><h4>WhatsApp</h4><p>9444125488</p>
+                    <p>9362640004</p></div></div>
                     <div class="contact-detail"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>aarthipriyas2004@gmail.com</p></div></div>
                     <div class="contact-detail"><i class="fas fa-clock"></i><div><h4>Office Hours</h4><ul class="hours-list"><li><span>Monday - Friday</span> <span>8AM - 6PM</span></li><li><span>Saturday</span> <span>9AM - 3PM</span></li><li><span>Sunday</span> <span>Closed</span></li></ul></div></div>
                 </div>
@@ -1111,11 +1556,30 @@ VELACHERY.</p></div></div>
                         <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" class="form-control" required></div>
                         <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" class="form-control" required></div>
                         <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" class="form-control" required></div>
+                        <div class="form-group"><label for="service">Service Interested In</label>
+                            <select id="service" class="form-control" required>
+                                <option value="">Select a service</option>
+                                <option value="root-canal">Root Canal Treatment</option>
+                                <option value="implants">Implants</option>
+                                <option value="aligners">Aligners</option>
+                                <option value="braces">Braces</option>
+                                <option value="whitening">Tooth Whitening</option>
+                                <option value="scaling">Scaling and Polishing</option>
+                                <option value="crowns">Crown and Bridges</option>
+                                <option value="extraction">Extraction and Impaction Removal</option>
+                                <option value="screening">Oral Cancer Screening</option>
+                                <option value="tmj">TMJ Disorders</option>
+                            </select>
+                        </div>
                         <div class="form-group"><label for="message">Message</label><textarea id="message" class="form-control" required></textarea></div>
-                        <button type="submit" class="submit-btn">Send Message</button>
+                        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
                         <p id="form-message"></p>
                     </form>
                 </div>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.396332074789!2d80.2173130749962!3d13.005758387307266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52679d2bf58fcd%3A0x3c5f41b6d88c7c5!2sVelachery%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1690203993177!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -1126,36 +1590,37 @@ VELACHERY.</p></div></div>
             <div class="footer-col">
                 <h4>AARTHI PRIYAS TOOTH CARE CLINIC</h4>
                 <p>Providing quality dental care for the whole family in a comfortable and welcoming environment.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
             <div class="footer-col">
                 <h4>Quick Links</h4>
-                <ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#team">Team</a></li></ul>
+                <ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#team">Team</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul>
             </div>
             <div class="footer-col">
                 <h4>Our Services</h4>
-                <ul><li><a href="#services">ROOT CANAL TREATMENT</a></li><li><a href="#services">IMPLANTS</a></li><li><a href="#services">ALIGNERS</a></li><li><a href="#services">BRACES.</a></li></ul>
+                <ul><li><a href="#services">Root Canal Treatment</a></li><li><a href="#services">Implants</a></li><li><a href="#services">Aligners</a></li><li><a href="#services">Braces</a></li><li><a href="#services">Tooth Whitening</a></li><li><a href="#services">Scaling and Polishing</a></li></ul>
             </div> 
             <div class="footer-col">
                 <h4>Contact Info</h4>
-                <ul>
-                    <li>
-                        <i class="fas fa-map-marker-alt"></i><br>
-                        AARTHIPRIYAS TOOTH CARE CLINIC,<br>
-                        C5, PARAMOUNT PARK, (SUPREME MOBILE UPSTAIRS)<br>
-                        VIJAYANAGAR,<br>
-                        VELACHERY-TAMBARAM MAIN ROAD,<br>
-                        VELACHERY-600091.<br>
-                        CHENNAI.
-                    </li>
-                    <li>
-                        <i class="fas fa-phone-alt"></i>  9444125488 <br>
-                        <i class="fas fa-phone-alt"></i>  9362640004
-                    </li>
-                    <li>
-                        <i class="fas fa-envelope"></i> aarthipriyas2004@gmail.com
-                    </li>
-                </ul>
+                <p>
+                    <i class="fas fa-map-marker-alt"></i> 
+                    AARTHIPRIYAS TOOTH CARE CLINIC,<br>
+                    C5, PARAMOUNT PARK, (SUPREME MOBILE UPSTAIRS)<br>
+                    VIJAYANAGAR, VELACHERY-TAMBARAM MAIN ROAD,<br>
+                    VELACHERY-600091, CHENNAI.
+                </p>
+                <p><i class="fas fa-phone-alt"></i> 9444125488 / 9362640004</p>
+                <p><i class="fab fa-whatsapp"></i> 9444125488 / 9362640004</p>
+                <p><i class="fas fa-envelope"></i> aarthipriyas2004@gmail.com</p>
             </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 AARTHI PRIYAS TOOTH CARE CLINIC. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -1175,21 +1640,33 @@ VELACHERY.</p></div></div>
             // --- Preloader ---
             const preloader = document.getElementById('preloader');
             window.addEventListener('load', () => {
-                preloader.classList.add('loaded');
+                setTimeout(() => {
+                    preloader.classList.add('loaded');
+                }, 1500);
+            });
+
+            // --- Header Scroll Effect ---
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
             });
 
             // --- Service Card Data & Population ---
             const servicesData = [
-                { title: 'ROOT CANAL TREATMENT', desc: 'Professional cleaning to remove plaque and tartar, helping prevent cavities and gum disease.', img: 'https://images.unsplash.com/photo-1606214223682-16217ac5e219?auto=format&fit=crop&w=400&q=80' },
-                { title: 'IMPLANTS', desc: 'Tooth-colored fillings to restore teeth affected by cavities or minor damage.', img: 'https://images.unsplash.com/photo-1619451999298-50344837581b?auto=format&fit=crop&w=400&q=80' },
-                { title: 'ALIGNERS', desc: 'Professional whitening treatments to brighten your smile by several shades.', img: 'https://images.unsplash.com/photo-1629424992096-518359194917?auto=format&fit=crop&w=400&q=80' },
-                { title: 'BRACES.', desc: 'Permanent solution for missing teeth that look, feel, and function like natural teeth.', img: 'https://images.unsplash.com/photo-1629425733943-e478958688a5?auto=format&fit=crop&w=400&q=80' },
-                { title: 'TOOTH WHITENERS.', desc: 'Traditional braces and clear aligners to correct teeth alignment and bite issues.', img: 'https://images.unsplash.com/photo-1599056673859-9d2a71d5308b?auto=format&fit=crop&w=400&q=80' },
-                { title: 'SCALIING AND POLISHING.', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
-                { title: 'CROWN AND BRIDGES..', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
-                { title: 'EXTRACTION AND IMPACTION REMOVAL.', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
-                { title: 'ORAL CANCER SCREENING AND PREVENTION.', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
-                { title: 'TREATMENT OF TEMPOROMANDIBULAR JOINT DISORDERS.', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'https://images.unsplash.com/photo-1579782527261-f055a49c6a59?auto=format&fit=crop&w=400&q=80' },
+                { title: 'ROOT CANAL TREATMENT', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'photos/root canal treatmenr.jpg', badge: 'Popular' },
+                { title: 'IMPLANTS', desc: 'Permanent solution for missing teeth that look, feel, and function like natural teeth.', img:  'photos/implant.jpg' },
+                { title: 'ALIGNERS', desc: 'Clear, removable aligners to straighten teeth discreetly without traditional braces.', img:'photos/aligners.jpg'  },
+                { title: 'BRACES', desc: 'Traditional braces and clear options to correct teeth alignment and bite issues.', img:'photos/braces.jpg', badge: 'Advanced' },
+                { title: 'TOOTH WHITENING', desc: 'Professional whitening treatments to brighten your smile by several shades.', img: 'photos/tooth whitening.jpg' },
+                { title: 'SCALING AND POLISHING', desc: 'Professional cleaning to remove plaque and tartar, helping prevent cavities and gum disease.', img: 'photos/scaling and polishing.jpg'},
+                { title: 'CROWNS AND BRIDGES', desc: 'Restore damaged teeth or replace missing ones with custom-made prosthetics.', img: 'photos/crown and bridges.jpg' },
+                { title: 'EXTRACTION AND IMPACTION REMOVAL', desc: 'Safe and careful removal of damaged or problematic teeth with minimal discomfort.', img: 'photos/impaction.jpg' },
+                { title: 'ORAL CANCER SCREENING', desc: 'Early detection and prevention of oral cancer through comprehensive examination.', img: 'photos/oral cancer screening.jpg' },
+                { title: 'TMJ DISORDERS TREATMENT', desc: 'Management of chronic facial pain due to neuralgic, myofacial and temporomandibular joint disorders.', img: 'photos/tmj disorders.jpg', badge: 'Specialized' },
             ];
 
             const servicesGrid = document.querySelector('.services-grid');
@@ -1197,10 +1674,12 @@ VELACHERY.</p></div></div>
                 const card = document.createElement('div');
                 card.className = 'service-card';
                 card.innerHTML = `
+                    ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
                     <div class="service-img" style="background-image: url('${service.img}');"></div>
                     <div class="service-content">
                         <h3>${service.title}</h3>
                         <p>${service.desc}</p>
+                        <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
                     </div>
                 `;
                 servicesGrid.appendChild(card);
@@ -1230,10 +1709,10 @@ VELACHERY.</p></div></div>
             const formMessage = document.getElementById('form-message');
             appointmentForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                formMessage.textContent = 'Thank you! Your message has been sent successfully.';
+                formMessage.textContent = 'Thank you! Your message has been sent successfully. We will contact you shortly.';
                 formMessage.style.color = 'var(--primary)';
                 this.reset();
-                setTimeout(() => formMessage.textContent = '', 4000);
+                setTimeout(() => formMessage.textContent = '', 5000);
             });
             
             // --- Scroll Animations ---
@@ -1260,6 +1739,110 @@ VELACHERY.</p></div></div>
             scrollToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+
+            // --- Animate Stats Counter ---
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const statsSection = document.querySelector('.about');
+            
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        statNumbers.forEach(stat => {
+                            const target = +stat.innerText.replace('+', '').replace('K', '000');
+                            const count = 0;
+                            const increment = target / 100;
+                            
+                            if (count < target) {
+                                stat.innerText = Math.ceil(count + increment);
+                                setTimeout(() => {
+                                    const updateCount = () => {
+                                        const currentCount = +stat.innerText;
+                                        if (currentCount < target) {
+                                            stat.innerText = Math.ceil(currentCount + increment);
+                                            setTimeout(updateCount, 20);
+                                        } else {
+                                            // Format the final number
+                                            if (target === 20000) {
+                                                stat.innerText = '20K+';
+                                            } else if (target === 20000) {
+                                                stat.innerText = '20+';
+                                            } else {
+                                                stat.innerText = target + '+';
+                                            }
+                                        }
+                                    };
+                                    updateCount();
+                                }, 200);
+                            }
+                        });
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statsObserver.observe(statsSection);
+            const sliderContainer = document.getElementById('about-slider-container');
+            const sliderImages = [
+                'photos/clinic-1.jpg',
+                'photos/clinic-2.jpg',
+                'photos/clinic-3.jpg',
+                'photos/clinic-4.jpg',
+                'photos/clinic-5.jpg',
+                'photos/clinic-6.jpg',
+                'photos/clinic-7.jpg'
+            ];
+
+            let currentSlideIndex = 0;
+
+            // Create and add dot container to the slider
+            const dotsContainer = document.createElement('div');
+            dotsContainer.className = 'slider-dots-container';
+
+            // Create and add image and dot elements for each image URL
+            sliderImages.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src; // This sets the src attribute for each image
+                img.alt = `Modern dental clinic view ${index + 1}`;
+                img.className = 'slider-image';
+                if (index === 0) img.classList.add('active'); // Show first image initially
+                sliderContainer.appendChild(img);
+
+                const dot = document.createElement('span');
+                dot.className = 'slider-dot';
+                if (index === 0) dot.classList.add('active'); // Highlight first dot initially
+                dot.dataset.index = index;
+                dotsContainer.appendChild(dot);
+            });
+
+            sliderContainer.appendChild(dotsContainer);
+
+            // Get all created slides and dots
+            const slides = sliderContainer.querySelectorAll('.slider-image');
+            const dots = dotsContainer.querySelectorAll('.slider-dot');
+
+            // Function to display a specific slide
+            const showSlide = (index) => {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlideIndex = index;
+            };
+
+            // Add click functionality to dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => showSlide(parseInt(dot.dataset.index)));
+            });
+
+            // Function to advance to the next slide
+            const nextSlide = () => {
+                const newIndex = (currentSlideIndex + 1) % slides.length;
+                showSlide(newIndex);
+            };
+
+            // Set the slider to automatically change images every 4 seconds
+            setInterval(nextSlide, 4000);
+            // --- NEW SLIDER SCRIPT END ---
         });
     </script>
 </body>
