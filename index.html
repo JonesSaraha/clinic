@@ -712,12 +712,19 @@
             background: var(--accent);
         }
 
+        /* Testimonials Slider Styles */
         .testimonials-container {
+            position: relative;
             max-width: 800px;
             margin: 0 auto;
+            overflow: hidden;
         }
-        
+
         .testimonial {
+            display: none;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease-in-out;
             background: rgba(255, 255, 255, 0.1);
             padding: 2.5rem;
             border-radius: 15px;
@@ -725,6 +732,12 @@
             border-left: 5px solid var(--accent);
             position: relative;
             backdrop-filter: blur(5px);
+        }
+
+        .testimonial.active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .testimonial::before {
@@ -738,10 +751,17 @@
             line-height: 1;
         }
         
+        .testimonial-rating {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
         .testimonial-text {
             font-style: italic;
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
+            line-height: 1.7;
             position: relative;
             z-index: 2;
         }
@@ -764,16 +784,40 @@
         .author-info h4 {
             font-weight: 700;
             font-size: 1.1rem;
+            margin-bottom: 0.3rem;
         }
         
         .author-info p {
             opacity: 0.8;
             font-size: 0.9rem;
+            margin: 0;
         }
 
-        .testimonial-rating {
-            color: var(--accent);
-            margin-bottom: 1rem;
+        /* Testimonial Dots */
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background-color: var(--white);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background-color: rgba(255, 255, 255, 0.8);
         }
         
         /* Contact Section */
@@ -1345,10 +1389,10 @@
         </div>
     </header>
 
-<!-- Fixed Banner Section -->
-<div class="banner" id="home">
-    <img src="photos/banner.jpg" alt="Aarthi Priyas Tooth Care Clinic" class="banner-img">
-</div>
+    <!-- Fixed Banner Section -->
+    <div class="banner" id="home">
+        <img src="photos/banner.jpg" alt="Aarthi Priyas Tooth Care Clinic" class="banner-img">
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -1441,11 +1485,10 @@
             </div>
             <div class="team-grid">
                 <div class="team-member">
-                    <!-- CORRECTED CODE -->
-<div class="team-img-wrapper">
-    <div class="team-img" style="background-image: url('photos/doc1.jpg');"></div>
-    <div class="team-overlay">M.D.S in Conservative and Endodontic</div>
-</div>
+                    <div class="team-img-wrapper">
+                        <div class="team-img" style="background-image: url('photos/doc1.jpg');"></div>
+                        <div class="team-overlay">M.D.S in Conservative and Endodontic</div>
+                    </div>
                     <div class="team-info">
                         <h3>DR. RAVIKUMAR M.D.S</h3>
                         <p class="team-role">Owner and Chief dentist</p>
@@ -1466,9 +1509,9 @@
 
                 <div class="team-member">
                     <div class="team-img-wrapper">
-    <div class="team-img" style="background-image: url('photos/doc2.jpg');"></div>
-    <div class="team-overlay">M.D.S in Conservative and Endodontic</div>
-</div>
+                        <div class="team-img" style="background-image: url('photos/doc2.jpg');"></div>
+                        <div class="team-overlay">M.D.S in Conservative and Endodontic</div>
+                    </div>
                     <div class="team-info">
                         <h3>DR. MASSILLAMANI M.D.S</h3>
                         <p class="team-role">Co-owner</p>
@@ -1498,34 +1541,88 @@
                 <h2>Patient Testimonials</h2>
                 <p>Hear what our patients have to say about their experience at our clinic.</p>
             </div>
+
             <div class="testimonials-container">
-                <div class="testimonial">
+                <div class="testimonial active">
                     <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <div class="testimonial-text">"I've been coming to Aarthi Priyas for years, and I wouldn't trust my dental care to anyone else. The staff is friendly, the office is clean, and Dr. Ravikumar is simply the best!"</div>
+                    <div class="testimonial-text">
+                        "I had a wonderful experience at Aarthi Priya's Tooth Care Clinic in Velachery. 
+                        The doctor is very kind, patient, and explains every step clearly. My root canal was 
+                        done smoothly and painlessly — absolutely fantastic treatment. Highly recommended 
+                        for anyone seeking quality dental care!"
+                    </div>
                     <div class="testimonial-author">
-                        <div class="author-img" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
-                        <div class="author-info"><h4>Jennifer Williams</h4><p>Patient since 2015</p></div>
+                        <div class="author-info">
+                            <h4>Hariharan Ilango</h4>
+                            <p>Patient</p>
+                        </div>
                     </div>
                 </div>
+
                 <div class="testimonial">
                     <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <div class="testimonial-text">"I used to dread going to the dentist until I found Aarthi Priyas. They make every visit comfortable and stress-free. My teeth have never been healthier!"</div>
+                    <div class="testimonial-text">
+                        "We are taking treatment from Dr. Ravikumar for the last eight years. 
+                        Being senior citizens, we've faced many dental problems, and he has always 
+                        been our most trusted dentist. He's competent, pleasant, and honest — 
+                        charges are reasonable and advice always proper."
+                    </div>
                     <div class="testimonial-author">
-                        <div class="author-img" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
-                        <div class="author-info"><h4>Robert Martinez</h4><p>Patient since 2018</p></div>
+                        <div class="author-info">
+                            <h4>Kasthuri Loganathan</h4>
+                            <p>Patient</p>
+                        </div>
                     </div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-text">
+                        "Thanks to Dr. Ravikumar for his extraordinary talent in root canal treatment. 
+                        He has been committed to single-sitting RCTs since the early 2000s. 
+                        My RCT and cap done in 2006 still feel perfect — no complaints ever!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Praba Murugaiyan</h4>
+                            <p>Patient</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-text">
+                        "I really appreciate the kind, professional, and attentive care, 
+                        the clean clinic, and the friendly staff. My experience was comfortable and 
+                        stress-free — even for complex procedures. So happy with my results!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Sara Vela</h4>
+                            <p>Patient</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Dots -->
+                <div class="testimonial-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
                 </div>
             </div>
         </div>
@@ -1781,6 +1878,8 @@ VELACHERY.</p></div></div>
             }, { threshold: 0.5 });
             
             statsObserver.observe(statsSection);
+            
+            // --- About Section Image Slider ---
             const sliderContainer = document.getElementById('about-slider-container');
             const sliderImages = [
                 'photos/clinic-1.jpg',
@@ -1842,7 +1941,75 @@ VELACHERY.</p></div></div>
 
             // Set the slider to automatically change images every 4 seconds
             setInterval(nextSlide, 4000);
-            // --- NEW SLIDER SCRIPT END ---
+            
+            // --- Testimonials Slider ---
+            let currentTestimonialIndex = 0;
+            const testimonials = document.querySelectorAll('.testimonial');
+            const testimonialDots = document.querySelectorAll('.dot');
+            let testimonialInterval;
+
+            function showTestimonial(index) {
+                // Hide all testimonials
+                testimonials.forEach(testimonial => {
+                    testimonial.classList.remove('active');
+                });
+                
+                // Remove active class from all dots
+                testimonialDots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Show current testimonial and activate dot
+                testimonials[index].classList.add('active');
+                testimonialDots[index].classList.add('active');
+                currentTestimonialIndex = index;
+            }
+
+            function nextTestimonial() {
+                const nextIndex = (currentTestimonialIndex + 1) % testimonials.length;
+                showTestimonial(nextIndex);
+            }
+
+            function startTestimonialSlider() {
+                // Clear existing interval
+                if (testimonialInterval) {
+                    clearInterval(testimonialInterval);
+                }
+                
+                // Start new interval (change every 4 seconds)
+                testimonialInterval = setInterval(nextTestimonial, 4000);
+            }
+
+            // Initialize testimonials slider
+            if (testimonials.length > 0) {
+                // Show first testimonial
+                showTestimonial(0);
+                
+                // Start automatic sliding
+                startTestimonialSlider();
+                
+                // Add click event to dots
+                testimonialDots.forEach(dot => {
+                    dot.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        showTestimonial(index);
+                        // Restart the interval when user manually changes slide
+                        startTestimonialSlider();
+                    });
+                });
+                
+                // Pause slider on hover (optional)
+                const testimonialsContainer = document.querySelector('.testimonials-container');
+                testimonialsContainer.addEventListener('mouseenter', () => {
+                    if (testimonialInterval) {
+                        clearInterval(testimonialInterval);
+                    }
+                });
+                
+                testimonialsContainer.addEventListener('mouseleave', () => {
+                    startTestimonialSlider();
+                });
+            }
         });
     </script>
 </body>
