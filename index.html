@@ -17,7 +17,8 @@
             --gray: #718096;
             --light-gray: #e2e8f0;
             --white: #ffffff;
-            --light-green: #e0f2f1;
+            --light-blue: #e6f7ff;
+            --testimonial-blue: #e0f2fe;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
@@ -39,7 +40,7 @@
         body {
             color: var(--dark);
             line-height: 1.6;
-            background-color: var(--light-green);
+            background-color: var(--light-blue);
             overflow-x: hidden;
         }
 
@@ -248,7 +249,7 @@
         .hero {
             padding: 4rem 1.5rem;
             text-align: center;
-            background: var(--light-green);
+            background: var(--light-blue);
         }
         
         .hero-content {
@@ -452,7 +453,7 @@
             left: 0;
             width: 100%;
             height: 100px;
-            background: linear-gradient(to bottom, var(--light-green), transparent);
+            background: linear-gradient(to bottom, var(--light-blue), transparent);
             z-index: 1;
         }
 
@@ -463,7 +464,7 @@
             left: 0;
             width: 100%;
             height: 100px;
-            background: linear-gradient(to top, var(--light-green), transparent);
+            background: linear-gradient(to top, var(--light-blue), transparent);
             z-index: 1;
         }
         
@@ -518,7 +519,7 @@
         .stat-item {
             text-align: center;
             padding: 1.5rem;
-            background: var(--light-green);
+            background: var(--light-blue);
             border-radius: 10px;
         }
 
@@ -537,29 +538,28 @@
         
         /* --- NEW SLIDER STYLES START --- */
         #about-slider-container {
-            position: relative; /* Needed for positioning slides and dots */
+            position: relative;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
-            /* This ensures the container has the correct aspect ratio before images load */
-            padding-top: 66.66%; /* Adjust this percentage based on your image aspect ratio (e.g., for 3:2 images) */
+            padding-top: 66.66%;
             background-color: var(--light-gray);
         }
 
         .slider-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures images fill the container without distortion */
+            object-fit: cover;
             position: absolute;
             top: 0;
             left: 0;
             opacity: 0;
-            transition: opacity 1s ease-in-out; /* Smooth fade effect */
+            transition: opacity 1s ease-in-out;
             display: block;
         }
 
         .slider-image.active {
-            opacity: 1; /* Makes the current image visible */
+            opacity: 1;
         }
 
         .slider-dots-container {
@@ -683,10 +683,227 @@
             transform: scale(1.2);
         }
         
+        /* NEW: Specialist Section with Title Left & Slider Right */
+        .specialists {
+            background: var(--white);
+            position: relative;
+        }
+        
+        .specialists-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .specialists-text {
+            padding-right: 2rem;
+        }
+        
+        .specialists-text h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .specialists-text h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            bottom: -15px;
+            left: 0;
+        }
+        
+        .specialists-text p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .specialist-features {
+            margin-top: 2rem;
+        }
+        
+        .specialist-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+        
+        .specialist-feature i {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-right: 1rem;
+            background-color: #e2f2f1;
+            padding: 10px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .specialist-feature h4 {
+            color: var(--secondary);
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        
+        .specialist-feature p {
+            color: var(--gray);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        /* Specialist Slider Section - REDUCED SIZE */
+        .specialist-slider-section {
+            position: relative;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+        
+        .specialist-slider-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .specialists-slider {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+        }
+        
+        .specialist-square {
+            background: var(--white);
+            min-width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .specialist-square:hover {
+            transform: none;
+        }
+        
+        .specialist-image-container {
+            width: 100%;
+            height: 70%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .specialist-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .specialist-square:hover .specialist-img {
+            transform: scale(1.1);
+        }
+        
+        .specialist-info {
+            padding: 1.2rem;
+            height: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            background: var(--white);
+        }
+        
+        .specialist-info h3 {
+            color: var(--secondary);
+            margin-bottom: 0.4rem;
+            font-size: 1.2rem;
+            line-height: 1.3;
+        }
+        
+        .specialist-info p {
+            color: var(--gray);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        .specialist-overlay-square {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+        }
+        
+        .specialist-square:hover .specialist-overlay-square {
+            opacity: 1;
+        }
+        
+        .specialist-overlay-square h3 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+        }
+        
+        .specialist-overlay-square p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.75rem;
+            margin: 0;
+        }
+        
+        /* Slider Controls - ONLY DOTS (NO ARROWS) */
+        .slider-controls-square {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        
+        .specialist-dots-square {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .specialist-dot-square {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .specialist-dot-square.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .specialist-dot-square:hover {
+            background-color: var(--primary);
+        }
+        
         /* Testimonials */
         .testimonials {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: var(--white);
+            background: var(--testimonial-blue);
+            color: var(--secondary);
             position: relative;
             overflow: hidden;
         }
@@ -698,18 +915,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.05"><text x="50%" y="50%" font-size="80" text-anchor="middle" dominant-baseline="middle" fill="white">❝</text></svg>');
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.05"><text x="50%" y="50%" font-size="80" text-anchor="middle" dominant-baseline="middle" fill="%231d3557">❝</text></svg>');
             background-repeat: repeat;
             opacity: 0.1;
         }
         
         .testimonials .section-title h2, 
         .testimonials .section-title p {
-            color: var(--white);
+            color: var(--secondary);
         }
         
         .testimonials .section-title h2::after {
-            background: var(--accent);
+            background: var(--primary);
         }
 
         /* Testimonials Slider Styles */
@@ -725,13 +942,14 @@
             opacity: 0;
             transform: translateX(50px);
             transition: all 0.8s ease-in-out;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.8);
             padding: 2.5rem;
             border-radius: 15px;
             margin-bottom: 2rem;
-            border-left: 5px solid var(--accent);
+            border-left: 5px solid var(--primary);
             position: relative;
             backdrop-filter: blur(5px);
+            color: var(--dark);
         }
 
         .testimonial.active {
@@ -746,7 +964,7 @@
             top: 10px;
             left: 20px;
             font-size: 5rem;
-            color: rgba(255, 255, 255, 0.1);
+            color: rgba(29, 53, 87, 0.1);
             font-family: Georgia, serif;
             line-height: 1;
         }
@@ -778,19 +996,21 @@
             margin-right: 1.5rem;
             background-size: cover;
             background-position: center;
-            border: 3px solid var(--accent);
+            border: 3px solid var(--primary);
         }
         
         .author-info h4 {
             font-weight: 700;
             font-size: 1.1rem;
             margin-bottom: 0.3rem;
+            color: var(--secondary);
         }
         
         .author-info p {
             opacity: 0.8;
             font-size: 0.9rem;
             margin: 0;
+            color: var(--dark);
         }
 
         /* Testimonial Dots */
@@ -805,26 +1025,28 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(29, 53, 87, 0.5);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
 
         .dot.active {
-            background-color: var(--white);
+            background-color: var(--secondary);
             transform: scale(1.2);
         }
 
         .dot:hover {
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(29, 53, 87, 0.8);
         }
         
         /* Contact Section */
         .contact-container {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 1fr;
             gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .contact-info {
@@ -874,67 +1096,6 @@
             font-size: 0.95rem;
         }
         
-        .contact-form {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .form-group { margin-bottom: 1.5rem; }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-            font-weight: 600;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--light-gray);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(26, 127, 117, 0.2);
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            padding: 0.9rem 2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .submit-btn:hover {
-            background: var(--primary-light);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-        #form-message {
-            margin-top: 1rem;
-            font-weight: 500;
-        }
-
         .map-container {
             margin-top: 3rem;
             border-radius: 15px;
@@ -1113,9 +1274,9 @@
         }
         
         @media (max-width: 992px) {
-            .about-content, .contact-container {
+            .about-content, .specialists-container {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 3rem;
             }
             
             .mobile-menu-btn { 
@@ -1177,6 +1338,38 @@
             
             .banner p {
                 font-size: 1.6rem;
+            }
+            
+            .specialists-text {
+                padding-right: 0;
+                text-align: center;
+            }
+            
+            .specialists-text h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .specialist-slider-section {
+                max-width: 400px;
+            }
+            
+            .specialist-features {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+            
+            .specialist-feature {
+                flex-direction: column;
+                text-align: center;
+                width: calc(50% - 1rem);
+            }
+            
+            .specialist-feature i {
+                margin-right: 0;
+                margin-bottom: 0.8rem;
             }
         }
         
@@ -1241,7 +1434,7 @@
                 margin-bottom: 1rem;
             }
             
-            .contact-info, .contact-form {
+            .contact-info {
                 padding: 1.5rem;
             }
             
@@ -1269,6 +1462,18 @@
             
             .banner p {
                 font-size: 1.4rem;
+            }
+            
+            .specialists-text h2 {
+                font-size: 2rem;
+            }
+            
+            .specialist-slider-section {
+                max-width: 350px;
+            }
+            
+            .specialist-feature {
+                width: 100%;
             }
         }
         
@@ -1343,6 +1548,30 @@
                 height: 45px;
                 font-size: 18px;
             }
+            
+            .specialists-text h2 {
+                font-size: 1.8rem;
+            }
+            
+            .specialist-slider-section {
+                max-width: 300px;
+            }
+            
+            .specialist-info h3 {
+                font-size: 1.1rem;
+            }
+            
+            .specialist-info p {
+                font-size: 0.8rem;
+            }
+            
+            .specialist-overlay-square h3 {
+                font-size: 1rem;
+            }
+            
+            .specialist-overlay-square p {
+                font-size: 0.7rem;
+            }
         }
         
         @media (max-width: 400px) {
@@ -1356,6 +1585,30 @@
             
             .logo-text {
                 font-size: 0.9rem;
+            }
+            
+            .specialist-slider-section {
+                max-width: 280px;
+            }
+            
+            .specialist-square {
+                aspect-ratio: 1/1.1;
+            }
+            
+            .specialists-text h2 {
+                font-size: 1.6rem;
+            }
+            
+            .specialist-info {
+                padding: 1rem;
+            }
+            
+            .specialist-info h3 {
+                font-size: 1rem;
+            }
+            
+            .specialist-info p {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -1382,8 +1635,9 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#team">Team</a></li>
+                    <li><a href="#specialists">Specialists</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#contact" class="nav-button">Book Appointment</a></li>
+                    <li><a href="#contact" class="nav-button">Contact Us</a></li>
                 </ul>
             </nav>
         </div>
@@ -1400,7 +1654,7 @@
             <h1>Welcome to Your Dental Health Partner</h1>
             <p>Experience world-class dental care with our state-of-the-art facilities and expert dental professionals.</p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">Book an Appointment</a>
+                <a href="#contact" class="btn btn-primary">Contact Us</a>
                 <a href="#services" class="btn btn-secondary">Our Services</a>
             </div>
         </div>
@@ -1534,6 +1788,34 @@
         </div>
     </section>
 
+    <!-- NEW: Specialist Section with Title Left & Slider Right -->
+    <section class="specialists section-hidden" id="specialists">
+        <div class="container">
+            <div class="specialists-container">
+                <div class="specialists-text">
+                    <h2>Our Expert Specialists</h2>
+                    <p>We have a team of highly specialized dental professionals who excel in their respective fields. Each specialist brings years of experience and advanced training to provide you with the best possible care.</p>
+                    
+                </div>
+                
+                <div class="specialist-slider-section">
+                    <div class="specialist-slider-container">
+                        <div class="specialists-slider" id="specialistsSlider">
+                            <!-- Specialist squares will be added by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Slider Controls - ONLY DOTS (NO ARROWS) -->
+                    <div class="slider-controls-square">
+                        <div class="specialist-dots-square" id="specialistDots">
+                            <!-- Dots will be added by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Testimonials Section -->
     <section class="testimonials section-hidden" id="testimonials">
         <div class="container">
@@ -1647,32 +1929,6 @@ VELACHERY.</p></div></div>
                     <div class="contact-detail"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>aarthipriyas2004@gmail.com</p></div></div>
                     <div class="contact-detail"><i class="fas fa-clock"></i><div><h4>Office Hours</h4><ul class="hours-list"><li><span>Monday - Friday</span> <span>8AM - 6PM</span></li><li><span>Saturday</span> <span>9AM - 3PM</span></li><li><span>Sunday</span> <span>Closed</span></li></ul></div></div>
                 </div>
-                <div class="contact-form">
-                    <h3>Send Us a Message</h3>
-                    <form id="appointmentForm">
-                        <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" class="form-control" required></div>
-                        <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" class="form-control" required></div>
-                        <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" class="form-control" required></div>
-                        <div class="form-group"><label for="service">Service Interested In</label>
-                            <select id="service" class="form-control" required>
-                                <option value="">Select a service</option>
-                                <option value="root-canal">Root Canal Treatment</option>
-                                <option value="implants">Implants</option>
-                                <option value="aligners">Aligners</option>
-                                <option value="braces">Braces</option>
-                                <option value="whitening">Tooth Whitening</option>
-                                <option value="scaling">Scaling and Polishing</option>
-                                <option value="crowns">Crown and Bridges</option>
-                                <option value="extraction">Extraction and Impaction Removal</option>
-                                <option value="screening">Oral Cancer Screening</option>
-                                <option value="tmj">TMJ Disorders</option>
-                            </select>
-                        </div>
-                        <div class="form-group"><label for="message">Message</label><textarea id="message" class="form-control" required></textarea></div>
-                        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
-                        <p id="form-message"></p>
-                    </form>
-                </div>
             </div>
             
             <div class="map-container">
@@ -1696,7 +1952,7 @@ VELACHERY.</p></div></div>
             </div>
             <div class="footer-col">
                 <h4>Quick Links</h4>
-                <ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#team">Team</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul>
+                <ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#team">Team</a></li><li><a href="#specialists">Specialists</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul>
             </div>
             <div class="footer-col">
                 <h4>Our Services</h4>
@@ -1754,17 +2010,71 @@ VELACHERY.</p></div></div>
 
             // --- Service Card Data & Population ---
             const servicesData = [
-                { title: 'ROOT CANAL TREATMENT', desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', img: 'photos/root canal treatmenr.jpg', badge: 'Popular' },
-                { title: 'IMPLANTS', desc: 'Permanent solution for missing teeth that look, feel, and function like natural teeth.', img:  'photos/implant.jpg' },
-                { title: 'ALIGNERS', desc: 'Clear, removable aligners to straighten teeth discreetly without traditional braces.', img:'photos/aligners.jpg'  },
-                { title: 'BRACES', desc: 'Traditional braces and clear options to correct teeth alignment and bite issues.', img:'photos/braces.jpg', badge: 'Advanced' },
-                { title: 'TOOTH WHITENING', desc: 'Professional whitening treatments to brighten your smile by several shades.', img: 'photos/tooth whitening.jpg' },
-                { title: 'SCALING AND POLISHING', desc: 'Professional cleaning to remove plaque and tartar, helping prevent cavities and gum disease.', img: 'photos/scaling and polishing.jpg'},
-                { title: 'CROWNS AND BRIDGES', desc: 'Restore damaged teeth or replace missing ones with custom-made prosthetics.', img: 'photos/crown and bridges.jpg' },
-                { title: 'EXTRACTION AND IMPACTION REMOVAL', desc: 'Safe and careful removal of damaged or problematic teeth with minimal discomfort.', img: 'photos/impaction.jpg' },
-                { title: 'ORAL CANCER SCREENING', desc: 'Early detection and prevention of oral cancer through comprehensive examination.', img: 'photos/oral cancer screening.jpg' },
-                { title: 'TMJ DISORDERS TREATMENT', desc: 'Management of chronic facial pain due to neuralgic, myofacial and temporomandibular joint disorders.', img: 'photos/tmj disorders.jpg', badge: 'Specialized' },
-            ];
+    { 
+        title: 'ROOT CANAL TREATMENT', 
+        desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', 
+        img: 'photos/root canal treatmenr.jpg', 
+        badge: 'Popular',
+        pdf: 'pdfs/clinic_1.pdf'
+    },
+    { 
+        title: 'IMPLANTS', 
+        desc: 'Permanent solution for missing teeth that look, feel, and function like natural teeth.', 
+        img: 'photos/implant.jpg',
+        pdf: 'pdfs/clinic_2.pdf'
+    },
+    { 
+        title: 'ALIGNERS', 
+        desc: 'Clear, removable aligners to straighten teeth discreetly without traditional braces.', 
+        img:'photos/aligners.jpg',
+        pdf: 'pdfs/clinic_3.pdf'
+    },
+    { 
+        title: 'BRACES', 
+        desc: 'Traditional braces and clear options to correct teeth alignment and bite issues.', 
+        img:'photos/braces.jpg', 
+        badge: 'Advanced',
+        pdf: 'pdfs/clinic_4.pdf'
+    },
+    { 
+        title: 'TOOTH WHITENING', 
+        desc: 'Professional whitening treatments to brighten your smile by several shades.', 
+        img: 'photos/tooth whitening.jpg',
+        pdf: 'pdfs/clinic_6.pdf'
+    },
+    { 
+        title: 'SCALING AND POLISHING', 
+        desc: 'Professional cleaning to remove plaque and tartar, helping prevent cavities and gum disease.', 
+        img: 'photos/scaling and polishing.jpg',
+        pdf: 'pdfs/clinic_7.pdf'
+    },
+    { 
+        title: 'CROWNS AND BRIDGES', 
+        desc: 'Restore damaged teeth or replace missing ones with custom-made prosthetics.', 
+        img: 'photos/crown and bridges.jpg',
+        pdf: 'pdfs/clinic_8.pdf'
+    },
+    { 
+        title: 'EXTRACTION AND IMPACTION REMOVAL', 
+        desc: 'Safe and careful removal of damaged or problematic teeth with minimal discomfort.', 
+        img: 'photos/impaction.jpg',
+        pdf: 'pdfs/clinic_9.pdf'
+    },
+    { 
+        title: 'ORAL CANCER SCREENING', 
+        desc: 'Early detection and prevention of oral cancer through comprehensive examination.', 
+        img: 'photos/oral cancer screening.jpg',
+        pdf: 'pdfs/clinic_11.pdf'
+    },
+    { 
+        title: 'TMJ DISORDERS TREATMENT', 
+        desc: 'Management of chronic facial pain due to neuralgic, myofacial and temporomandibular joint disorders.', 
+        img: 'photos/tmj disorders.jpg', 
+        badge: 'Specialized',
+        pdf: 'pdfs/clinic_10.pdf'
+    },
+];
+
 
             const servicesGrid = document.querySelector('.services-grid');
             servicesData.forEach(service => {
@@ -1776,7 +2086,7 @@ VELACHERY.</p></div></div>
                     <div class="service-content">
                         <h3>${service.title}</h3>
                         <p>${service.desc}</p>
-                        <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                        <a href="${service.pdf}" target="_blank" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
                     </div>
                 `;
                 servicesGrid.appendChild(card);
@@ -1801,17 +2111,6 @@ VELACHERY.</p></div></div>
                 });
             });
 
-            // --- Form Submission ---
-            const appointmentForm = document.getElementById('appointmentForm');
-            const formMessage = document.getElementById('form-message');
-            appointmentForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                formMessage.textContent = 'Thank you! Your message has been sent successfully. We will contact you shortly.';
-                formMessage.style.color = 'var(--primary)';
-                this.reset();
-                setTimeout(() => formMessage.textContent = '', 5000);
-            });
-            
             // --- Scroll Animations ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1900,15 +2199,15 @@ VELACHERY.</p></div></div>
             // Create and add image and dot elements for each image URL
             sliderImages.forEach((src, index) => {
                 const img = document.createElement('img');
-                img.src = src; // This sets the src attribute for each image
+                img.src = src;
                 img.alt = `Modern dental clinic view ${index + 1}`;
                 img.className = 'slider-image';
-                if (index === 0) img.classList.add('active'); // Show first image initially
+                if (index === 0) img.classList.add('active');
                 sliderContainer.appendChild(img);
 
                 const dot = document.createElement('span');
                 dot.className = 'slider-dot';
-                if (index === 0) dot.classList.add('active'); // Highlight first dot initially
+                if (index === 0) dot.classList.add('active');
                 dot.dataset.index = index;
                 dotsContainer.appendChild(dot);
             });
@@ -1941,6 +2240,105 @@ VELACHERY.</p></div></div>
 
             // Set the slider to automatically change images every 4 seconds
             setInterval(nextSlide, 4000);
+            
+            // --- NEW Specialist Section with Title Left & Slider Right ---
+            const specialistsData = [
+                { 
+                    title: 'Oral Surgeon', 
+                    img: 'photos/oral surgeon.jpg'
+                },
+                { 
+                    title: 'Orthodontist', 
+                    img: 'photos/orthodontist.jpg'
+                },
+                { 
+                    title: 'Pedodontist', 
+                    img: 'photos/pedodontist.jpg'
+                },
+                { 
+                    title: 'Periodontist', 
+                    img: 'photos/periodontist.jpg'
+                },
+                { 
+                    title: 'Prosthodontist & Implantologist', 
+                    img: 'photos/prosthodontistand implantologist.jpg'
+                }
+            ];
+
+            let currentSpecialistIndex = 0;
+            const specialistsSlider = document.getElementById('specialistsSlider');
+            const specialistDotsContainer = document.getElementById('specialistDots');
+
+            // Create specialist squares
+            specialistsData.forEach((specialist, index) => {
+                const square = document.createElement('div');
+                square.className = 'specialist-square';
+                square.innerHTML = `
+                    <div class="specialist-image-container">
+                        <img src="${specialist.img}" alt="${specialist.title}" class="specialist-img">
+                        <div class="specialist-overlay-square">
+                            <div>
+                                <h3>${specialist.title}</h3>
+                                ${specialist.description ? `<p>${specialist.description}</p>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="specialist-info">
+                        <h3>${specialist.title}</h3>
+                        ${specialist.description ? `<p>${specialist.description}</p>` : ''}
+                    </div>
+                `;
+                specialistsSlider.appendChild(square);
+
+                // Create dot
+                const dot = document.createElement('span');
+                dot.className = 'specialist-dot-square';
+                if (index === 0) dot.classList.add('active');
+                dot.dataset.index = index;
+                specialistDotsContainer.appendChild(dot);
+            });
+
+            const specialistSquares = document.querySelectorAll('.specialist-square');
+            const specialistDots = document.querySelectorAll('.specialist-dot-square');
+
+            // Function to show specific specialist slide (single at a time)
+            function showSpecialistSlide(index) {
+                // Calculate transform value (each slide is 100% width)
+                const transformValue = -(index * 100) + '%';
+                specialistsSlider.style.transform = `translateX(${transformValue})`;
+
+                // Update active dot
+                specialistDots.forEach(dot => dot.classList.remove('active'));
+                specialistDots[index].classList.add('active');
+                
+                currentSpecialistIndex = index;
+            }
+
+            // Next slide function
+            function nextSpecialistSlide() {
+                currentSpecialistIndex = (currentSpecialistIndex + 1) % specialistsData.length;
+                showSpecialistSlide(currentSpecialistIndex);
+            }
+
+            // Add click events to dots
+            specialistDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    showSpecialistSlide(index);
+                });
+            });
+
+            // Auto slide functionality - slides one at a time
+            let specialistInterval = setInterval(nextSpecialistSlide, 3000);
+
+            // Pause auto-slide on hover
+            specialistsSlider.addEventListener('mouseenter', () => {
+                clearInterval(specialistInterval);
+            });
+
+            specialistsSlider.addEventListener('mouseleave', () => {
+                specialistInterval = setInterval(nextSpecialistSlide, 3000);
+            });
             
             // --- Testimonials Slider ---
             let currentTestimonialIndex = 0;
