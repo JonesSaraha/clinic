@@ -272,10 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Prosthodontist & Implantologist', 
             img: 'photos/prosthodontistand implantologist.jpg'
         },
-        {
-            title:'General physician',
-            img:'photos/General physician.jpeg'
-        }
     ];
 
     let currentSpecialistIndex = 0;
