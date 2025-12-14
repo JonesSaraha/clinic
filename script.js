@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             desc: 'Painless treatment to save infected teeth while relieving pain and discomfort.', 
             img: 'photos/root canal treatmenr.jpg', 
             badge: 'Popular',
-            pdf: 'pdfs/clinic_1.pdf'
+            src:'pages/root.html'
         },
         { 
             title: 'IMPLANTS', 
@@ -85,21 +85,21 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     ];
 
-    const servicesGrid = document.querySelector('.services-grid');
-    servicesData.forEach(service => {
-        const card = document.createElement('div');
-        card.className = 'service-card';
-        card.innerHTML = `
-            ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
-            <div class="service-img" style="background-image: url('${service.img}');"></div>
-            <div class="service-content">
-                <h3>${service.title}</h3>
-                <p>${service.desc}</p>
-                <a href="${service.pdf}" target="_blank" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
-            </div>
-        `;
-        servicesGrid.appendChild(card);
-    });
+   const servicesGrid = document.querySelector('.services-grid');
+servicesData.forEach(service => {
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.innerHTML = `
+        ${service.badge ? `<span class="service-badge">${service.badge}</span>` : ''}
+        <div class="service-img" style="background-image: url('${service.img}');"></div>
+        <div class="service-content">
+            <h3>${service.title}</h3>
+            <p>${service.desc}</p>
+            <a href="${service.src}" target="_blank" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+    `;
+    servicesGrid.appendChild(card);
+});
 
     // --- Mobile Menu ---
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Canal Treatment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #e6f7ff; /* Light blue background */
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 102, 153, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1a75ff, #00bfff);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        
+        .text-content {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 20px;
+        }
+        
+        .image-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-left: 20px;
+        }
+        
+       .tooth-image {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.tooth-icon {
+    font-size: 150px;
+    color: #4da6ff;
+    margin-bottom: 20px;
+}
+        
+        .tooth-diagram p {
+            text-align: center;
+            color: #0066cc;
+            font-weight: 500;
+        }
+        
+        .procedure-steps {
+            margin-top: 30px;
+        }
+        
+        .step {
+            background-color: #f0f9ff;
+            border-left: 5px solid #4da6ff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 8px rgba(0, 102, 204, 0.2);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .step-number {
+            background-color: #4da6ff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: #0066cc;
+            font-size: 1.1rem;
+        }
+        
+        .step-description {
+            padding-left: 45px;
+            color: #333;
+        }
+        
+        .checkmark {
+            color: #00cc66;
+            margin-right: 8px;
+        }
+        
+        .key-info {
+            background-color: #e6f2ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid #b3d9ff;
+        }
+        
+        .key-info h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .key-info h3 i {
+            margin-right: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .info-icon {
+            color: #1a75ff;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f9ff;
+            color: #0066cc;
+            border-top: 1px solid #b3d9ff;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .text-content, .image-section {
+                padding: 0;
+            }
+            
+            .image-section {
+                margin-top: 30px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ROOT CANAL TREATMENT</h1>
+            <p class="subtitle">A root canal is a treatment to save a badly infected or painful tooth, relieving pain and preserving your natural smile.</p>
+        </header>
+        
+        <div class="content-wrapper">
+            <div class="text-content">
+                <div class="key-info">
+                    <h3><i class="fas fa-tooth"></i> About Root Canal Treatment</h3>
+                    <p>Root canal treatment (endodontic therapy) is a dental procedure used to treat infection at the center of a tooth (the pulp). It's performed when the pulp becomes infected or inflamed due to deep decay, repeated dental procedures, cracks, or trauma.</p>
+                </div>
+                
+                <div class="procedure-steps">
+                    <h2 style="color: #0066cc; margin-bottom: 20px; border-bottom: 2px solid #4da6ff; padding-bottom: 10px;">The Root Canal Procedure</h2>
+                    
+                    <div class="step">
+                        <div class="step-header">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Diagnosis and Preparation</div>
+                        </div>
+                        <div class="step-description">
+                            <p><i class="fas fa-check checkmark"></i> When the pulp gets infected due to deep cavity, crack, or injury, it causes severe pain.</p>
+                            <p><i class="fas fa-check checkmark"></i> The dentist examines the tooth, takes X-rays, and administers local anesthesia to numb the area.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-header">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Removing Infected Pulp</div>
+                        </div>
+                        <div class="step-description">
+                            <p><i class="fas fa-check checkmark"></i> In root canal treatment, the dentist removes the infected pulp from inside the tooth.</p>
+                            <p><i class="fas fa-check checkmark"></i> A small opening is made in the crown of the tooth to access the pulp chamber.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-header">
+                            <div class="step-number">3</div>
+                            <div class="step-title">Cleaning and Shaping</div>
+                        </div>
+                        <div class="step-description">
+                            <p><i class="fas fa-check checkmark"></i> The inside of the tooth is then cleaned, shaped, and disinfected.</p>
+                            <p><i class="fas fa-check checkmark"></i> Special instruments are used to remove bacteria and debris from the root canals.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-header">
+                            <div class="step-number">4</div>
+                            <div class="step-title">Filling the Canals</div>
+                        </div>
+                        <div class="step-description">
+                            <p><i class="fas fa-check checkmark"></i> After cleaning, the space is filled with a safe, sealing material (gutta-percha) to prevent infection.</p>
+                            <p><i class="fas fa-check checkmark"></i> The canals are sealed completely to prevent future contamination.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-header">
+                            <div class="step-number">5</div>
+                            <div class="step-title">Restoration</div>
+                        </div>
+                        <div class="step-description">
+                            <p><i class="fas fa-check checkmark"></i> Finally, the tooth is restored with a filling and often a crown (cap) to strengthen it.</p>
+                            <p><i class="fas fa-check checkmark"></i> The crown protects the treated tooth and restores its full function.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-section">
+    <div class="tooth-diagram">
+        <img src="photos/Root.png" 
+             alt="Root Canal Treatment Diagram" 
+             class="tooth-image"
+             onerror="this.onerror=null; this.style.display='none'; document.querySelector('.tooth-icon').style.display='block';">
+        <i class="fas fa-tooth tooth-icon" style="display:none;"></i>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Visual representation of a tooth undergoing root canal treatment</p>
+    </div>
+                
+                <div class="key-info" style="width: 100%;">
+                    <h3><i class="fas fa-lightbulb"></i> Key Benefits</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-heartbeat info-icon"></i>
+                            <div>Relieves severe tooth pain and discomfort</div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-shield-alt info-icon"></i>
+                            <div>Prevents spread of infection to adjacent teeth</div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-smile info-icon"></i>
+                            <div>Preserves your natural tooth and smile</div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-utensils info-icon"></i>
+                            <div>Restores normal chewing and biting function</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Root canal treatment has a high success rate and can save a tooth that might otherwise need to be extracted.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Consult with your dentist to determine if root canal treatment is right for you.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add interactive effects to steps
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.step');
+            
+            steps.forEach(step => {
+                step.addEventListener('click', function() {
+                    // Toggle a visual indicator for the clicked step
+                    this.style.backgroundColor = this.style.backgroundColor === 'rgb(255, 255, 255)' ? '#f0f9ff' : '#ffffff';
+                });
+            });
+            
+            // Add animation to the tooth icon
+            const toothIcon = document.querySelector('.tooth-icon');
+            toothIcon.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            toothIcon.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
