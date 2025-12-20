@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowns and Bridges</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f5ff 50%, #d4ebff 100%);
+            min-height: 100vh;
+            color: #005c99;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        .main-header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            position: relative;
+        }
+        
+        .main-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, #66ccff, #0077cc);
+            border-radius: 5px;
+        }
+        
+        .main-header h1 {
+            font-size: 3.5em;
+            color: #0077cc;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #66ccff, #0077cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Image Section - Updated for clean image */
+        .image-section {
+            width: 100%;
+            margin: 40px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 20px;
+            color: #0077cc;
+            font-size: 1.2em;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 119, 204, 0.1);
+            border-top: 6px solid #66ccff;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(0, 119, 204, 0.15);
+            border-top-color: #0077cc;
+        }
+        
+        .content-card h3 {
+            font-size: 1.6em;
+            color: #0077cc;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .content-card h3::before {
+            content: "✓";
+            background: #e6f7ff;
+            color: #0077cc;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            box-shadow: 0 5px 15px rgba(0, 119, 204, 0.2);
+            flex-shrink: 0;
+        }
+        
+        .content-card p {
+            color: #004d80;
+            line-height: 1.7;
+            font-size: 1.15em;
+            flex-grow: 1;
+        }
+        
+        /* Definition Sections */
+        .definition-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin: 40px 0 60px;
+        }
+        
+        .definition-card {
+            background: linear-gradient(135deg, #e6f7ff, #d9f2ff);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 119, 204, 0.1);
+            border-left: 8px solid;
+        }
+        
+        .crown-definition {
+            border-left-color: #66ccff;
+        }
+        
+        .bridge-definition {
+            border-left-color: #0077cc;
+        }
+        
+        .definition-card h3 {
+            font-size: 1.8em;
+            color: #0077cc;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .crown-definition h3 {
+            color: #66ccff;
+        }
+        
+        .bridge-definition h3 {
+            color: #0077cc;
+        }
+        
+        .definition-card p {
+            color: #005c99;
+            line-height: 1.7;
+            font-size: 1.15em;
+            text-align: center;
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            background: linear-gradient(135deg, #e6f7ff, #d9f2ff);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 60px 0 40px;
+            text-align: center;
+            border: 3px solid #99ddff;
+        }
+        
+        .benefits-title {
+            color: #0077cc;
+            font-size: 2em;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .benefits-content {
+            color: #005c99;
+            font-size: 1.2em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-header h1 {
+                font-size: 2.5em;
+            }
+            
+            .main-image {
+                max-height: 350px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 30px 0;
+            }
+            
+            .content-card {
+                padding: 30px 25px;
+            }
+            
+            .definition-section {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .definition-card {
+                padding: 30px;
+            }
+            
+            .benefits-section {
+                padding: 30px 25px;
+                margin: 40px 0 30px;
+            }
+            
+            .image-caption {
+                padding: 12px 20px;
+                font-size: 1.1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-header h1 {
+                font-size: 2em;
+            }
+            
+            .definition-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .definition-card {
+                padding: 25px 20px;
+            }
+            
+            .definition-card h3 {
+                font-size: 1.5em;
+            }
+            
+            .content-card h3 {
+                font-size: 1.4em;
+            }
+            
+            .benefits-section {
+                padding: 25px 20px;
+            }
+            
+            .image-caption {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+            
+            .main-image {
+                max-height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="main-header">
+            <h1>Crowns and Bridges</h1>
+        </div>
+        
+        <!-- Image Section - Clean layout -->
+        <div class="image-section">
+            <!-- First the image -->
+            <img src="../photos/crown.png" alt="Crowns and Bridges Dental Treatment" class="main-image">
+            
+            <!-- Then the caption BELOW the image -->
+            <div class="image-caption">Dental Crowns and Bridges Restoration</div>
+        </div>
+        
+        <!-- Definition Cards -->
+        <div class="definition-section">
+            <div class="definition-card crown-definition">
+                <h3>Crown (Dental Cap)</h3>
+                <p>A crown is a cap placed over a broken, weak, or root canal–treated tooth to protect it and make it strong.</p>
+            </div>
+            
+            <div class="definition-card bridge-definition">
+                <h3>Bridge</h3>
+                <p>A bridge fills the gap created by one or more missing teeth by anchoring onto the nearby natural teeth.</p>
+            </div>
+        </div>
+        
+        <!-- Benefits Grid -->
+        <div class="content-grid">
+            <div class="content-card">
+                <h3>They Look Like Natural Teeth</h3>
+                <p>Crowns and bridges are made to match your tooth colour, shape, and size, giving a natural appearance that blends seamlessly with your smile.</p>
+            </div>
+            
+            <div class="content-card">
+                <h3>Helps in Proper Chewing and Speaking</h3>
+                <p>They restore the function of teeth, making chewing comfortable and improving speech clarity for better oral function.</p>
+            </div>
+        </div>
+        
+        <!-- Combined Benefits Section -->
+        <div class="benefits-section">
+            <div class="benefits-title">Restorative Benefits</div>
+            <div class="benefits-content">
+                Crowns and bridges work together to restore both the appearance and function of damaged or missing teeth. While crowns protect weakened teeth, bridges replace missing ones - together they help maintain proper dental alignment, prevent shifting of remaining teeth, and restore confidence in your smile.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

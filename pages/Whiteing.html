@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teeth Whitening Treatment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f8fdff 0%, #f0f9ff 50%, #e6f5ff 100%);
+            min-height: 100vh;
+            color: #005c99;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        .main-header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            position: relative;
+        }
+        
+        .main-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, #66ccff, #0099ff);
+            border-radius: 5px;
+        }
+        
+        .main-header h1 {
+            font-size: 3.5em;
+            color: #0099ff;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #66ccff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Definition Box */
+        .definition-box {
+            background: linear-gradient(135deg, #e6f7ff, #d9f2ff);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0 40px;
+            border-left: 8px solid #66ccff;
+            font-size: 1.2em;
+            line-height: 1.7;
+            color: #006699;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 153, 255, 0.1);
+        }
+        
+        /* Image Section - Updated for clean image */
+        .image-section {
+            width: 100%;
+            margin: 40px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 20px;
+            color: #0099ff;
+            font-size: 1.2em;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        /* Procedure Section */
+        .procedure-header {
+            text-align: center;
+            margin: 50px 0 40px;
+        }
+        
+        .procedure-header h2 {
+            font-size: 2.8em;
+            color: #0099ff;
+            background: linear-gradient(135deg, #66ccff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .procedure-header p {
+            font-size: 1.2em;
+            color: #66b3ff;
+        }
+        
+        /* Procedure Steps Grid */
+        .procedure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0 60px;
+        }
+        
+        .procedure-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 153, 255, 0.1);
+            border-top: 6px solid #66ccff;
+            transition: all 0.3s ease;
+            position: relative;
+            counter-increment: step-counter;
+        }
+        
+        .procedure-card::before {
+            content: counter(step-counter);
+            position: absolute;
+            top: -25px;
+            left: 30px;
+            background: #0099ff;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 153, 255, 0.3);
+        }
+        
+        .procedure-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(0, 153, 255, 0.15);
+            border-top-color: #0099ff;
+        }
+        
+        .procedure-card h3 {
+            font-size: 1.5em;
+            color: #0099ff;
+            margin-bottom: 20px;
+            padding-top: 15px;
+        }
+        
+        .procedure-card p {
+            color: #005c99;
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+        
+        /* After Care Section */
+        .aftercare-section {
+            background: linear-gradient(135deg, #e6f7ff, #d9f2ff);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 60px 0 40px;
+            border: 3px solid #99ddff;
+            position: relative;
+        }
+        
+        .aftercare-section::before {
+            content: "⚠️";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            box-shadow: 0 8px 20px rgba(0, 153, 255, 0.2);
+            z-index: 2;
+        }
+        
+        .aftercare-title {
+            text-align: center;
+            color: #0099ff;
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .aftercare-content {
+            color: #005c99;
+            font-size: 1.15em;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-header h1 {
+                font-size: 2.5em;
+            }
+            
+            .definition-box {
+                padding: 25px;
+                font-size: 1.1em;
+            }
+            
+            .main-image {
+                max-height: 350px;
+            }
+            
+            .procedure-header h2 {
+                font-size: 2.2em;
+            }
+            
+            .procedure-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 30px 0 40px;
+            }
+            
+            .procedure-card {
+                padding: 30px 25px 25px;
+            }
+            
+            .procedure-card::before {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+                top: -22px;
+            }
+            
+            .aftercare-section {
+                padding: 35px 25px;
+                margin: 40px 0 30px;
+            }
+            
+            .image-caption {
+                padding: 12px 20px;
+                font-size: 1.1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-header h1 {
+                font-size: 2em;
+            }
+            
+            .definition-box {
+                padding: 20px;
+                font-size: 1em;
+            }
+            
+            .procedure-header h2 {
+                font-size: 1.8em;
+            }
+            
+            .procedure-card h3 {
+                font-size: 1.3em;
+            }
+            
+            .aftercare-section {
+                padding: 30px 20px;
+            }
+            
+            .image-caption {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+            
+            .main-image {
+                max-height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="main-header">
+            <h1>Teeth Whitening Treatment</h1>
+        </div>
+        
+        <!-- Definition Section -->
+        <div class="definition-box">
+            <p>Bleaching in dentistry is a cosmetic procedure where special whitening agents (usually hydrogen peroxide or carbamide peroxide) are applied to the teeth to lighten their color and remove stains.</p>
+        </div>
+        
+        <!-- Image Section - Clean layout -->
+        <div class="image-section">
+            <!-- First the image -->
+            <img src="../photos/whiting.png" alt="Teeth Whitening Procedure" class="main-image">
+            
+            <!-- Then the caption BELOW the image -->
+            <div class="image-caption">Professional Teeth Whitening Treatment</div>
+        </div>
+        
+        <!-- Procedure Section -->
+        <div class="procedure-header">
+            <h2>Bleaching Procedure for Teeth</h2>
+            <p>Step-by-step guide to teeth whitening treatment</p>
+        </div>
+        
+        <div class="procedure-grid">
+            <div class="procedure-card">
+                <h3>Lightens Tooth Colour</h3>
+                <p>Bleaching uses safe whitening gels to make your teeth several shades lighter, removing years of stains and discoloration.</p>
+            </div>
+            
+            <div class="procedure-card">
+                <h3>Done at Clinic or at Home</h3>
+                <p>The dentist can whiten your teeth in one visit, or give you custom trays to use bleaching gel at home for gradual whitening.</p>
+            </div>
+            
+            <div class="procedure-card">
+                <h3>Quick and Comfortable</h3>
+                <p>The procedure is usually painless, taking about 30–60 minutes in the clinic with immediate visible results.</p>
+            </div>
+            
+            <div class="procedure-card">
+                <h3>May Cause Temporary Sensitivity</h3>
+                <p>Some people may feel mild sensitivity for a day or two, which goes away on its own without any treatment.</p>
+            </div>
+            
+            <div class="procedure-card">
+                <h3>Needs Good After-Care</h3>
+                <p>Avoid tea, coffee, smoking, or coloured foods for 24–48 hours to keep the whitening results stable and long-lasting.</p>
+            </div>
+        </div>
+        
+        <!-- After Care Section -->
+        <div class="aftercare-section">
+            <div class="aftercare-title">Important After-Care Note</div>
+            <div class="aftercare-content">
+                To maintain your bright smile, avoid staining substances like tea, coffee, red wine, and tobacco for at least 48 hours after treatment. Follow your dentist's specific after-care instructions for optimal results.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

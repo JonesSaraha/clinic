@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMJ Disorder Treatment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f5ff 50%, #d4ebff 100%);
+            min-height: 100vh;
+            color: #004d80;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        .main-header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            position: relative;
+        }
+        
+        .main-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, #66ccff, #3399cc);
+            border-radius: 5px;
+        }
+        
+        .main-header h1 {
+            font-size: 3.2em;
+            color: #3399cc;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #66ccff, #3399cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Definition Section */
+        .definition-section {
+            background: linear-gradient(135deg, #e6f7ff, #d9f2ff);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0 40px;
+            border-left: 8px solid #66ccff;
+            font-size: 1.2em;
+            line-height: 1.7;
+            color: #006699;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(51, 153, 204, 0.1);
+        }
+        
+        .definition-section h2 {
+            color: #3399cc;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        /* Image Section - Updated for clean image */
+        .image-section {
+            width: 100%;
+            margin: 40px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 20px;
+            color: #3399cc;
+            font-size: 1.2em;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        /* Symptoms Section */
+        .symptoms-section {
+            margin: 50px 0 60px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5em;
+            color: #3399cc;
+            background: linear-gradient(135deg, #66ccff, #3399cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: 1.2em;
+            color: #66b3ff;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(51, 153, 204, 0.1);
+            border-top: 6px solid #66ccff;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(51, 153, 204, 0.15);
+            border-top-color: #3399cc;
+        }
+        
+        .content-card h3 {
+            font-size: 1.4em;
+            color: #3399cc;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .content-card h3::before {
+            content: "•";
+            background: #e6f7ff;
+            color: #66ccff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.8em;
+            box-shadow: 0 4px 12px rgba(51, 153, 204, 0.2);
+            flex-shrink: 0;
+        }
+        
+        .content-card p {
+            color: #004d80;
+            line-height: 1.6;
+            font-size: 1.1em;
+            flex-grow: 1;
+        }
+        
+        /* Management Section */
+        .management-section {
+            background: linear-gradient(135deg, #e6f7ff, #d9f2ff);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 60px 0 40px;
+            border: 3px solid #99ddff;
+        }
+        
+        .management-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .management-header h2 {
+            font-size: 2.2em;
+            color: #3399cc;
+            background: linear-gradient(135deg, #66ccff, #3399cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .management-header p {
+            font-size: 1.1em;
+            color: #66b3ff;
+        }
+        
+        /* Management Grid */
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .management-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(51, 153, 204, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .management-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(51, 153, 204, 0.15);
+        }
+        
+        .management-card h4 {
+            font-size: 1.3em;
+            color: #3399cc;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .management-card p {
+            color: #004d80;
+            line-height: 1.6;
+            font-size: 1.05em;
+            text-align: center;
+        }
+        
+        /* Reassurance Section */
+        .reassurance-section {
+            background: linear-gradient(135deg, #66ccff, #3399cc);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 50px 0 30px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(51, 153, 204, 0.2);
+        }
+        
+        .reassurance-section h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .reassurance-section p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-header h1 {
+                font-size: 2.3em;
+            }
+            
+            .definition-section {
+                padding: 25px;
+                font-size: 1.1em;
+            }
+            
+            .main-image {
+                max-height: 350px;
+            }
+            
+            .section-header h2 {
+                font-size: 2em;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin: 25px 0;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+            
+            .management-section {
+                padding: 30px 25px;
+                margin: 40px 0 30px;
+            }
+            
+            .management-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .reassurance-section {
+                padding: 25px;
+                margin: 30px 0;
+            }
+            
+            .image-caption {
+                padding: 12px 20px;
+                font-size: 1.1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-header h1 {
+                font-size: 1.9em;
+            }
+            
+            .definition-section {
+                padding: 20px;
+                font-size: 1em;
+            }
+            
+            .content-card h3 {
+                font-size: 1.2em;
+            }
+            
+            .management-section, .reassurance-section {
+                padding: 25px 20px;
+            }
+            
+            .image-caption {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+            
+            .main-image {
+                max-height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="main-header">
+            <h1>Temporomandibular Joint Disorder</h1>
+        </div>
+        
+        <!-- Definition Section -->
+        <div class="definition-section">
+            <h2>What is TMJ?</h2>
+            <p>TMJ is the jaw joint that helps you open and close your mouth. Most TMJ issues are not serious and can improve with simple care.</p>
+        </div>
+        
+        <!-- Image Section - Clean layout -->
+        <div class="image-section">
+            <!-- First the image -->
+            <img src="../photos/tmj.png" alt="TMJ Disorder Treatment" class="main-image">
+            
+            <!-- Then the caption BELOW the image -->
+            <div class="image-caption">TMJ Joint and Muscle Structure</div>
+        </div>
+        
+        <!-- Symptoms Section -->
+        <div class="symptoms-section">
+            <div class="section-header">
+                <h2>TMJ Symptoms and Problems</h2>
+                <p>Common signs and triggers of temporomandibular joint disorder</p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Common Symptoms</h3>
+                    <p>TMJ problems can cause jaw pain, clicking sounds, difficulty opening mouth, or headaches that affect daily activities.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Pain Triggers</h3>
+                    <p>Pain may increase with chewing hard foods, stress, or jaw clenching - especially during times of tension or anxiety.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Manageable Condition</h3>
+                    <p>Most TMJ issues are not serious and can improve with proper care and lifestyle adjustments under dental guidance.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Management Section -->
+        <div class="management-section">
+            <div class="management-header">
+                <h2>Management – Easy Points</h2>
+                <p>Simple strategies to manage and relieve TMJ discomfort</p>
+            </div>
+            
+            <div class="management-grid">
+                <div class="management-card">
+                    <h4>Soft Diet</h4>
+                    <p>Avoid hard or chewy foods to reduce strain on the jaw joint during healing.</p>
+                </div>
+                
+                <div class="management-card">
+                    <h4>Warm Compress</h4>
+                    <p>Apply warm compress on the jaw to relax tense muscles and improve circulation.</p>
+                </div>
+                
+                <div class="management-card">
+                    <h4>Jaw Exercises</h4>
+                    <p>Follow exercises given by dentist/physiotherapist to improve jaw movement and flexibility.</p>
+                </div>
+                
+                <div class="management-card">
+                    <h4>Avoid Harmful Habits</h4>
+                    <p>Stop habits like nail biting, teeth grinding, or excessive gum chewing that strain the jaw.</p>
+                </div>
+                
+                <div class="management-card">
+                    <h4>Stress Control</h4>
+                    <p>Manage stress through relaxation techniques as stress often causes jaw clenching.</p>
+                </div>
+                
+                <div class="management-card">
+                    <h4>Pain Management</h4>
+                    <p>Use simple painkillers as advised by the dentist for temporary relief of discomfort.</p>
+                </div>
+                
+                <div class="management-card">
+                    <h4>Advanced Care</h4>
+                    <p>Severe or long-lasting cases may need splints/night guards or specialist care for proper treatment.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reassurance Section -->
+        <div class="reassurance-section">
+            <h3>Most Cases are Manageable</h3>
+            <p>The majority of TMJ disorders respond well to conservative treatment methods. With proper care, dietary adjustments, and stress management, most people experience significant improvement in symptoms and return to normal jaw function.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Aligners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f5ff 50%, #d4ebff 100%);
+            min-height: 100vh;
+            color: #004080;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, #66ccff, #3399ff);
+            border-radius: 5px;
+        }
+        
+        .header h1 {
+            font-size: 3.8em;
+            color: #3399ff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #66ccff, #3399ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+            50% { text-shadow: 0 0 20px rgba(102, 204, 255, 0.4); }
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            color: #66b3ff;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .image-section {
+            width: 100%;
+            margin: 40px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 20px;
+            color: #3399ff;
+            font-size: 1.2em;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 20px 50px rgba(51, 153, 255, 0.15);
+            border: 2px solid #99d6ff;
+            margin-top: 40px;
+        }
+        
+        .definition-box {
+            background: linear-gradient(135deg, #f7fbff, #ebf5ff);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            text-align: center;
+            border-left: 8px solid #66ccff;
+            animation: slideIn 0.8s ease-out;
+            min-height: auto;
+            overflow: visible;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .definition-box p {
+            font-size: 1.6em;
+            line-height: 1.7;
+            color: #0066cc;
+            font-weight: 500;
+            margin: 0;
+            padding: 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(51, 153, 255, 0.1);
+            border-top: 6px solid #99d6ff;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: visible;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(51, 153, 255, 0.2);
+            border-top: 6px solid #66ccff;
+        }
+        
+        .feature-card h3 {
+            color: #3399ff;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+        
+        .feature-card h3::before {
+            content: "•";
+            background: #ebf5ff;
+            color: #66ccff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.8em;
+            box-shadow: 0 5px 15px rgba(51, 153, 255, 0.2);
+            flex-shrink: 0;
+        }
+        
+        .feature-card p {
+            color: #004080;
+            line-height: 1.7;
+            font-size: 1.15em;
+            margin-top: auto;
+            padding-top: 10px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .treatment-info {
+            background: linear-gradient(135deg, #e6f2ff, #d9ebff);
+            border-radius: 25px;
+            padding: 60px 40px 40px;
+            text-align: center;
+            margin-top: 60px;
+            border: 3px solid #99d6ff;
+            position: relative;
+            overflow: visible;
+            min-height: auto;
+        }
+        
+        .treatment-info::before {
+            content: "⏰";
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 2em;
+            box-shadow: 0 10px 25px rgba(51, 153, 255, 0.2);
+            z-index: 3;
+        }
+        
+        .treatment-title {
+            color: #3399ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 600;
+            padding-top: 10px;
+        }
+        
+        .treatment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .detail-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(51, 153, 255, 0.1);
+            border: 2px solid #cce6ff;
+        }
+        
+        .detail-title {
+            color: #0066cc;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .detail-title::before {
+            content: "✓";
+            color: #66ccff;
+            font-size: 1.2em;
+        }
+        
+        .detail-content {
+            color: #004080;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #66ccff, #3399ff);
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 50px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(51, 153, 255, 0.3);
+        }
+        
+        .highlight-box h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-box p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 40px 20px 30px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+                line-height: 1.2;
+            }
+            
+            .main-image {
+                max-height: 400px;
+            }
+            
+            .content-section {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            
+            .definition-box {
+                padding: 25px 20px;
+            }
+            
+            .definition-box p {
+                font-size: 1.3em;
+                line-height: 1.5;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin: 30px 0;
+            }
+            
+            .feature-card {
+                padding: 25px;
+                min-height: auto;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.3em;
+            }
+            
+            .feature-card p {
+                font-size: 1.1em;
+            }
+            
+            .treatment-info {
+                padding: 50px 20px 30px;
+                margin-top: 40px;
+            }
+            
+            .treatment-details {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .highlight-box {
+                padding: 25px;
+            }
+            
+            .image-caption {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .definition-box p {
+                font-size: 1.2em;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.2em;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .image-caption {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            
+            .main-image {
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title Section -->
+        <div class="header">
+            <h1>Dental Aligners</h1>
+            <p>The Clear, Modern Way to Straighten Your Smile</p>
+        </div>
+        
+        <!-- Image Section - Image only, no box -->
+        <div class="image-section">
+            <!-- Just the image with no box/border -->
+            <img src="../photos/Aligners.png" alt="Clear Dental Aligners" class="main-image">
+            
+            <!-- Caption below image -->
+            <div class="image-caption">Nearly Invisible Teeth Straightening</div>
+        </div>
+        
+        <!-- Content Section -->
+        <div class="content-section">
+            <div class="definition-box">
+                <p>Aligners are clear plastic trays used to straighten teeth, offering a discreet alternative to traditional braces.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Nearly Invisible</h3>
+                    <p>They are almost invisible, so most people don't notice them while you're wearing them.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Removable Design</h3>
+                    <p>You can remove them while eating and brushing, making oral hygiene much easier than with traditional braces.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Wear Time</h3>
+                    <p>You need to wear them for 20–22 hours a day for best results and effective treatment progression.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Progressive Treatment</h3>
+                    <p>New aligner trays are given every 10–14 days to slowly and gently move teeth into their desired positions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>No Wires or Brackets</h3>
+                    <p>Unlike traditional braces, aligners have no wires or brackets, providing greater comfort and aesthetics.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Treatment Duration</h3>
+                    <p>Treatment time varies depending on the case, but usually lasts from 6 months to 2 years.</p>
+                </div>
+            </div>
+            
+            <div class="treatment-info">
+                <div class="treatment-title">Key Treatment Details</div>
+                <div class="treatment-details">
+                    <div class="detail-box">
+                        <div class="detail-title">Wear Schedule</div>
+                        <div class="detail-content">20–22 hours daily for optimal results</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-title">Tray Changes</div>
+                        <div class="detail-content">New aligners every 10–14 days</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-title">Treatment Time</div>
+                        <div class="detail-content">Typically 6 months to 2 years</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>Custom-Made for You</h3>
+                <p>Aligners are custom-made for each person using advanced digital scans of your teeth, ensuring a perfect fit and effective treatment plan tailored specifically to your smile.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scaling and Polishing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f5ff 50%, #d4ebff 100%);
+            min-height: 100vh;
+            color: #006699;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        .main-header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            position: relative;
+        }
+        
+        .main-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, #4da6ff, #0088cc);
+            border-radius: 5px;
+        }
+        
+        .main-header h1 {
+            font-size: 3.5em;
+            color: #0088cc;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #66ccff, #0088cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Definition Section */
+        .definition-section {
+            text-align: center;
+            margin: 30px 0 40px;
+        }
+        
+        .definition-box {
+            background: linear-gradient(135deg, #e6f7ff, #d9f2ff);
+            border-radius: 20px;
+            padding: 30px;
+            display: inline-block;
+            max-width: 800px;
+            font-size: 1.3em;
+            color: #006699;
+            font-weight: 500;
+            line-height: 1.6;
+            border-left: 8px solid #66ccff;
+            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.1);
+        }
+        
+        /* Image Section - Updated for clean image */
+        .image-section {
+            width: 100%;
+            margin: 40px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 20px;
+            color: #0088cc;
+            font-size: 1.2em;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        /* Procedure Steps */
+        .procedure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+            counter-reset: step-counter;
+        }
+        
+        .procedure-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0, 136, 204, 0.1);
+            border-top: 6px solid #66ccff;
+            transition: all 0.3s ease;
+            position: relative;
+            counter-increment: step-counter;
+        }
+        
+        .procedure-card::before {
+            content: counter(step-counter);
+            position: absolute;
+            top: -25px;
+            left: 30px;
+            background: #0088cc;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
+        }
+        
+        .procedure-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(0, 136, 204, 0.15);
+            border-top-color: #0088cc;
+        }
+        
+        .procedure-card h3 {
+            font-size: 1.5em;
+            color: #0088cc;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+        
+        .procedure-card p {
+            color: #005580;
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            background: linear-gradient(135deg, #e6f7ff, #d9f2ff);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 60px 0 40px;
+            text-align: center;
+            border: 3px solid #99ddff;
+            position: relative;
+        }
+        
+        .benefits-section::before {
+            content: "⏰";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.2);
+            z-index: 2;
+        }
+        
+        .benefits-title {
+            color: #0088cc;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .benefits-content {
+            color: #006699;
+            font-size: 1.15em;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Frequency Recommendation */
+        .frequency-box {
+            background: linear-gradient(135deg, #66ccff, #0088cc);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            color: white;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 136, 204, 0.2);
+        }
+        
+        .frequency-box h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .frequency-box p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-header h1 {
+                font-size: 2.5em;
+            }
+            
+            .definition-box {
+                padding: 25px;
+                font-size: 1.1em;
+            }
+            
+            .main-image {
+                max-height: 350px;
+            }
+            
+            .procedure-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 30px 0 40px;
+            }
+            
+            .procedure-card {
+                padding: 30px 25px 25px;
+            }
+            
+            .procedure-card::before {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+                top: -22px;
+            }
+            
+            .benefits-section {
+                padding: 35px 25px;
+                margin: 40px 0 30px;
+            }
+            
+            .frequency-box {
+                padding: 25px;
+                margin: 30px 0;
+            }
+            
+            .image-caption {
+                padding: 12px 20px;
+                font-size: 1.1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-header h1 {
+                font-size: 2em;
+            }
+            
+            .definition-box {
+                padding: 20px;
+                font-size: 1em;
+            }
+            
+            .procedure-card h3 {
+                font-size: 1.3em;
+            }
+            
+            .benefits-section, .frequency-box {
+                padding: 25px 20px;
+            }
+            
+            .image-caption {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+            
+            .main-image {
+                max-height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="main-header">
+            <h1>Scaling and Polishing</h1>
+        </div>
+        
+        <!-- Definition -->
+        <div class="definition-section">
+            <div class="definition-box">
+                Scaling and polishing is a professional dental cleaning procedure.
+            </div>
+        </div>
+        
+        <!-- Image Section - Clean layout -->
+        <div class="image-section">
+            <!-- First the image -->
+            <img src="../photos/scale.png" alt="Scaling and Polishing Procedure" class="main-image">
+            
+            <!-- Then the caption BELOW the image -->
+            <div class="image-caption">Professional Dental Cleaning</div>
+        </div>
+        
+        <!-- Procedure Steps -->
+        <div class="procedure-grid">
+            <div class="procedure-card">
+                <h3>Removes Tartar and Plaque</h3>
+                <p>Scaling cleans off hard deposits and soft plaque that regular brushing cannot remove, ensuring thorough cleaning below the gumline.</p>
+            </div>
+            
+            <div class="procedure-card">
+                <h3>Prevents Gum Disease</h3>
+                <p>By removing these deposits, scaling helps reduce bleeding gums, swelling, and bad breath, promoting healthier gums.</p>
+            </div>
+            
+            <div class="procedure-card">
+                <h3>Polishing Makes Teeth Smooth</h3>
+                <p>After cleaning, polishing removes minor stains and makes the tooth surface shiny and smooth, preventing future plaque buildup.</p>
+            </div>
+            
+            <div class="procedure-card">
+                <h3>Quick and Painless Procedure</h3>
+                <p>Usually takes 20–30 minutes and is comfortable for most patients, with no downtime required afterward.</p>
+            </div>
+            
+            <div class="procedure-card">
+                <h3>Helps Maintain Oral Health</h3>
+                <p>Doing scaling and polishing every 6 months keeps gums healthy and reduces the risk of future dental problems like cavities and gum disease.</p>
+            </div>
+        </div>
+        
+        <!-- Benefits Section -->
+        <div class="benefits-section">
+            <div class="benefits-title">Quick and Comfortable Treatment</div>
+            <div class="benefits-content">
+                The entire scaling and polishing procedure typically takes only 20-30 minutes, making it an efficient way to maintain optimal oral health with minimal time investment.
+            </div>
+        </div>
+        
+        <!-- Frequency Recommendation -->
+        <div class="frequency-box">
+            <h3>Recommended Every 6 Months</h3>
+            <p>For optimal oral health, professional scaling and polishing should be done every 6 months. This regular maintenance prevents serious dental issues and maintains a healthy, bright smile.</p>
+        </div>
+    </div>
+</body>
+</html>

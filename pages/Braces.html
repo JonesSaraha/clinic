@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traditional Braces Options</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f5ff 50%, #d4ebff 100%);
+            min-height: 100vh;
+            color: #004080;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        .main-header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            position: relative;
+        }
+        
+        .main-header h1 {
+            font-size: 3.5em;
+            color: #0066cc;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #4da6ff, #0066cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Metal Braces Section */
+        .metal-section {
+            margin-bottom: 60px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #4da6ff;
+        }
+        
+        .metal-header h2 {
+            color: #0066cc;
+            font-size: 2.5em;
+        }
+        
+        .ceramic-header h2 {
+            color: #339966;
+            font-size: 2.5em;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 102, 204, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border-left: 5px solid;
+        }
+        
+        .metal-card {
+            border-left-color: #4da6ff;
+        }
+        
+        .ceramic-card {
+            border-left-color: #66cc99;
+        }
+        
+        .content-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #004080;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .metal-card h3::before {
+            content: "o";
+            background: #e6f2ff;
+            color: #4da6ff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .ceramic-card h3::before {
+            content: "✓";
+            background: #e6fff2;
+            color: #66cc99;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .content-card p {
+            color: #004080;
+            line-height: 1.6;
+            font-size: 1.05em;
+        }
+        
+        /* Image Section - Updated for clean images */
+        .image-section {
+            width: 100%;
+            margin: 30px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 15px;
+            color: #0066cc;
+            font-size: 1.1em;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        /* Ceramic Braces Section */
+        .ceramic-section {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 3px solid #66cc99;
+        }
+        
+        .ceramic-header {
+            border-bottom: 3px solid #66cc99;
+        }
+        
+        /* Simple and Clean Layout */
+        .definition-box {
+            background: linear-gradient(135deg, #e6f2ff, #d9ebff);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2em;
+            color: #0066cc;
+            font-weight: 500;
+        }
+        
+        .metal-definition {
+            border-left: 6px solid #4da6ff;
+        }
+        
+        .ceramic-definition {
+            border-left: 6px solid #66cc99;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-header h1 {
+                font-size: 2.5em;
+            }
+            
+            .section-header h2 {
+                font-size: 2em;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .content-card {
+                padding: 20px;
+            }
+            
+            .main-image {
+                max-height: 300px;
+            }
+            
+            .definition-box {
+                padding: 20px;
+                font-size: 1.1em;
+            }
+            
+            .image-caption {
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-header h1 {
+                font-size: 2em;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8em;
+            }
+            
+            .content-card h3 {
+                font-size: 1.2em;
+            }
+            
+            .main-image {
+                max-height: 250px;
+            }
+            
+            .image-caption {
+                padding: 6px 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Header -->
+        <div class="main-header">
+            <h1>Traditional Braces Options</h1>
+        </div>
+        
+        <!-- Metal Braces Section -->
+        <div class="metal-section">
+            <!-- Metal Braces Definition -->
+            <div class="definition-box metal-definition">
+                <p>Metal braces are the traditional braces used to straighten teeth effectively.</p>
+            </div>
+            
+            <!-- Metal Braces Image - Clean layout -->
+            <div class="image-section">
+                <!-- First the image -->
+                <img src="../photos/MetalBraces.png" alt="Metal Braces" class="main-image">
+                
+                <!-- Then the caption BELOW the image -->
+                <div class="image-caption">Traditional Metal Braces</div>
+            </div>
+            
+            <!-- Metal Braces Features -->
+            <div class="section-header metal-header">
+                <h2>Metal Braces</h2>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-card metal-card">
+                    <h3>Most Common Type</h3>
+                    <p>Metal braces are the traditional braces used to straighten teeth effectively.</p>
+                </div>
+                
+                <div class="content-card metal-card">
+                    <h3>Very Strong and Durable</h3>
+                    <p>Made of stainless steel, they are less likely to break and work well for all kinds of tooth corrections.</p>
+                </div>
+                
+                <div class="content-card metal-card">
+                    <h3>Constant Gentle Pressure</h3>
+                    <p>They work by applying steady pressure to move teeth into proper alignment.</p>
+                </div>
+                
+                <div class="content-card metal-card">
+                    <h3>Rubber Band Colors Available</h3>
+                    <p>Patients can choose different colored elastic bands, making treatment more fun for kids and teens.</p>
+                </div>
+                
+                <div class="content-card metal-card">
+                    <h3>Affordable Orthodontic Option</h3>
+                    <p>Metal braces are usually the most economical choice compared to ceramic or invisible aligners.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ceramic Braces Section -->
+        <div class="ceramic-section">
+            <!-- Ceramic Braces Definition -->
+            <div class="definition-box ceramic-definition">
+                <p>Ceramic braces are made of tooth-colored or clear material, so they blend with teeth and look less visible.</p>
+            </div>
+            
+            <!-- Ceramic Braces Image - Clean layout -->
+            <div class="image-section">
+                <!-- First the image -->
+                <img src="../photos/Ceramic braces.png" alt="Ceramic Braces" class="main-image">
+                
+                <!-- Then the caption BELOW the image -->
+                <div class="image-caption">Aesthetic Ceramic Braces</div>
+            </div>
+            
+            <!-- Ceramic Braces Header -->
+            <div class="section-header ceramic-header">
+                <h2>Ceramic Braces</h2>
+            </div>
+            
+            <!-- Ceramic Braces Features -->
+            <div class="content-grid">
+                <div class="content-card ceramic-card">
+                    <h3>Tooth-Colored & Aesthetic</h3>
+                    <p>Ceramic braces are made of tooth-colored or clear material, so they blend with teeth and look less visible.</p>
+                </div>
+                
+                <div class="content-card ceramic-card">
+                    <h3>Work Like Metal Braces</h3>
+                    <p>They give similar results to metal braces and are equally effective for most bite corrections.</p>
+                </div>
+                
+                <div class="content-card ceramic-card">
+                    <h3>Less Noticeable</h3>
+                    <p>Ideal for adults or patients who want a more aesthetic brace option.</p>
+                </div>
+                
+                <div class="content-card ceramic-card">
+                    <h3>More Delicate</h3>
+                    <p>Ceramic brackets can be more fragile compared to metal ones.</p>
+                </div>
+                
+                <div class="content-card ceramic-card">
+                    <h3>Slightly Costlier</h3>
+                    <p>They are usually more expensive than metal braces due to their cosmetic appearance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

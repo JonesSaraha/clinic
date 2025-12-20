@@ -31,57 +31,57 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'IMPLANTS', 
             desc: 'Permanent solution for missing teeth that look, feel, and function like natural teeth.', 
             img: 'photos/implant.jpg',
-            pdf: 'pdfs/clinic_2.pdf'
+            src: 'pages/implants.html'
         },
         { 
             title: 'ALIGNERS', 
             desc: 'Clear, removable aligners to straighten teeth discreetly without traditional braces.', 
             img:'photos/aligners.jpg',
-            pdf: 'pdfs/clinic_3.pdf'
+            src: 'pages/Aligners.html'
         },
         { 
             title: 'BRACES', 
             desc: 'Traditional braces and clear options to correct teeth alignment and bite issues.', 
             img:'photos/braces.jpg', 
             badge: 'Advanced',
-            pdf: 'pdfs/clinic_4.pdf'
+            src: 'pages/Braces.html'
         },
         { 
             title: 'TOOTH WHITENING', 
             desc: 'Professional whitening treatments to brighten your smile by several shades.', 
             img: 'photos/tooth whitening.jpg',
-            pdf: 'pdfs/clinic_6.pdf'
+            src: 'pages/whiteing.html'
         },
         { 
             title: 'SCALING AND POLISHING', 
             desc: 'Professional cleaning to remove plaque and tartar, helping prevent cavities and gum disease.', 
             img: 'photos/scaling and polishing.png',
-            pdf: 'pdfs/clinic_7.pdf'
+            src: 'pages/Scalingandpolishing.html'
         },
         { 
             title: 'CROWNS AND BRIDGES', 
             desc: 'Restore damaged teeth or replace missing ones with custom-made prosthetics.', 
             img: 'photos/crown and bridges.jpg',
-            pdf: 'pdfs/clinic_8.pdf'
+            src: 'pages/Crownandbridge.html'
         },
         { 
             title: 'EXTRACTION AND IMPACTION REMOVAL', 
             desc: 'Safe and careful removal of damaged or problematic teeth with minimal discomfort.', 
             img: 'photos/impaction.jpg',
-            pdf: 'pdfs/clinic_9.pdf'
+            src: 'pages/Extraction.html'
         },
         { 
             title: 'ORAL CANCER SCREENING', 
             desc: 'Early detection and prevention of oral cancer through comprehensive examination.', 
             img: 'photos/oral cancer screening.jpg',
-            pdf: 'pdfs/clinic_11.pdf'
+            src: 'pages/oral.html'
         },
         { 
             title: 'TMJ DISORDERS TREATMENT', 
             desc: 'Management of chronic facial pain due to neuralgic, myofacial and temporomandibular joint disorders.', 
             img: 'photos/tmj disorders.jpg', 
             badge: 'Specialized',
-            pdf: 'pdfs/CLINIC_12.pdf'
+            src: 'pages/tmj.html'
         },
     ];
 
