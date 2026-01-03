@@ -253,7 +253,7 @@ servicesData.forEach(service => {
     // --- NEW Specialist Section with Title Left & Slider Right ---
     const specialistsData = [
         { 
-            title: 'Oral Surgeon', 
+            title: 'Oral Surgeon and Implantologist', 
             img: 'photos/oral surgeon.jpg'
         },
         { 
@@ -265,7 +265,7 @@ servicesData.forEach(service => {
             img: 'photos/pedodontist.jpg'
         },
         { 
-            title: 'Periodontist', 
+            title: 'Periodontist and Implantologist', 
             img: 'photos/periodontist.jpg'
         },
         { 
