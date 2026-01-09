@@ -592,7 +592,7 @@ section {
 
 .team-member {
     background: var(--white);
-    border-radius: 15px;
+    border-radius: 1px;
     box-shadow: var(--shadow-md);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -605,7 +605,7 @@ section {
 }
 
 .team-img-wrapper {
-    height: 400px;
+    height: 350px;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -621,9 +621,9 @@ section {
     background-color: var(--white);
     transition: transform 0.4s ease;
 }
-.team-member:hover .team-img {
-    transform: scale(1.05);
-}
+/*.team-member:hover .team-img {
+    /*transform: scale(1.05);
+}*/
 
 .team-overlay {
     position: absolute;
