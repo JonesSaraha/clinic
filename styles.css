@@ -621,7 +621,7 @@ section {
     background-color: var(--white);
     transition: transform 0.4s ease;
 }
-
+/**/
 .team-overlay {
     position: absolute;
     bottom: 0;
