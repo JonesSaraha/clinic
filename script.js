@@ -316,14 +316,14 @@ servicesData.forEach(service => {
         const transformValue = -(index * 100) + '%';
         specialistsSlider.style.transform = `translateX(${transformValue})`;
 
-        // Update active dot
+        
         specialistDots.forEach(dot => dot.classList.remove('active'));
         specialistDots[index].classList.add('active');
         
         currentSpecialistIndex = index;
     }
 
-    // Next slide function
+    
     function nextSpecialistSlide() {
         currentSpecialistIndex = (currentSpecialistIndex + 1) % specialistsData.length;
         showSpecialistSlide(currentSpecialistIndex);
