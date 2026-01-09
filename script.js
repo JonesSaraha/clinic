@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'TOOTH WHITENING', 
             desc: 'Professional whitening treatments to brighten your smile by several shades.', 
             img: 'photos/tooth whitening.jpg',
-            src: 'pages/whiteing.html'
+            src: 'pages/whiting.html'
         },
         { 
             title: 'SCALING AND POLISHING', 
