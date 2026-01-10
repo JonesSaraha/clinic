@@ -272,6 +272,10 @@ servicesData.forEach(service => {
             title: 'Prosthodontist & Implantologist', 
             img: 'photos/prosthodontistand implantologist.jpg'
         },
+        {
+            title:'oral surgeon and implantologist',
+            img:'photos/oral surgeon and implantologist.jpg'
+        }
     ];
 
     let currentSpecialistIndex = 0;
