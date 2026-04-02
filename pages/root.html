@@ -21,6 +21,73 @@
             min-height: 100vh;
         }
         
+        /* Top navigation bar container */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(77, 166, 255, 0.4);
+            padding: 12px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 64, 128, 0.05);
+            max-width: 1100px;
+            margin: 0 auto 20px;
+            border-radius: 50px;
+        }
+        
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        /* Back button styling — matches dental theme, clean and modern */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(105deg, #ffffff, #f9fdff);
+            border: 1.5px solid #66ccff;
+            border-radius: 48px;
+            padding: 10px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1e6ab3;
+            text-decoration: none;
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(51, 153, 255, 0.15);
+            letter-spacing: 0.3px;
+        }
+        
+        .back-button:hover {
+            background: linear-gradient(105deg, #eef7ff, #e2f0fe);
+            border-color: #3399ff;
+            box-shadow: 0 6px 14px rgba(51, 153, 255, 0.25);
+            transform: translateY(-2px);
+            color: #0055aa;
+        }
+        
+        .back-button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Arrow icon (simple unicode left arrow) */
+        .back-button::before {
+            content: "←";
+            font-size: 1.3rem;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+        
+        .back-button:hover::before {
+            transform: translateX(-3px);
+        }
+        
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -74,19 +141,19 @@
         }
         
        .tooth-image {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.tooth-icon {
-    font-size: 150px;
-    color: #4da6ff;
-    margin-bottom: 20px;
-}
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tooth-icon {
+            font-size: 150px;
+            color: #4da6ff;
+            margin-bottom: 20px;
+        }
         
         .tooth-diagram p {
             text-align: center;
@@ -194,6 +261,17 @@
         }
         
         @media (max-width: 768px) {
+            .nav-bar {
+                margin-bottom: 15px;
+                padding: 8px 16px;
+            }
+            .back-button {
+                padding: 7px 20px;
+                font-size: 0.95rem;
+            }
+            .back-button::before {
+                font-size: 1.2rem;
+            }
             .content-wrapper {
                 flex-direction: column;
                 padding: 20px;
@@ -211,9 +289,24 @@
                 font-size: 2.2rem;
             }
         }
+        
+        @media (max-width: 480px) {
+            .back-button {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- ========== TOP NAVIGATION BUTTON (Back to Home) ========== -->
+    <div class="nav-bar">
+        <div class="nav-container">
+            <!-- Back button linking to /index.html as requested -->
+            <a href="../index.html" class="back-button">Back to Home</a>
+        </div>
+    </div>
+    
     <div class="container">
         <header>
             <h1>ROOT CANAL TREATMENT</h1>
@@ -288,14 +381,14 @@
             </div>
             
             <div class="image-section">
-    <div class="tooth-diagram">
-        <img src="../photos/Root.png" 
-             alt="Root Canal Treatment Diagram" 
-             class="tooth-image"
-             onerror="this.onerror=null; this.style.display='none'; document.querySelector('.tooth-icon').style.display='block';">
-        <i class="fas fa-tooth tooth-icon" style="display:none;"></i>
-        <p style="font-size: 0.9rem; margin-top: 10px;">Visual representation of a tooth undergoing root canal treatment</p>
-    </div>
+                <div class="tooth-diagram">
+                    <img src="../photos/Root.png" 
+                         alt="Root Canal Treatment Diagram" 
+                         class="tooth-image"
+                         onerror="this.onerror=null; this.style.display='none'; document.querySelector('.tooth-icon').style.display='block';">
+                    <i class="fas fa-tooth tooth-icon" style="display:none;"></i>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Visual representation of a tooth undergoing root canal treatment</p>
+                </div>
                 
                 <div class="key-info" style="width: 100%;">
                     <h3><i class="fas fa-lightbulb"></i> Key Benefits</h3>
@@ -341,14 +434,16 @@
             
             // Add animation to the tooth icon
             const toothIcon = document.querySelector('.tooth-icon');
-            toothIcon.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.1)';
-                this.style.transition = 'transform 0.3s ease';
-            });
-            
-            toothIcon.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-            });
+            if (toothIcon) {
+                toothIcon.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                toothIcon.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            }
         });
     </script>
 </body>

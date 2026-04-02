@@ -18,6 +18,70 @@
             color: #004d80;
         }
         
+        /* Top navigation bar container */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(102, 204, 255, 0.4);
+            padding: 12px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 64, 128, 0.05);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        /* Back button styling — matches dental theme, clean and modern */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(105deg, #ffffff, #f9fdff);
+            border: 1.5px solid #66ccff;
+            border-radius: 48px;
+            padding: 10px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1e6ab3;
+            text-decoration: none;
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(51, 153, 255, 0.15);
+            letter-spacing: 0.3px;
+        }
+        
+        .back-button:hover {
+            background: linear-gradient(105deg, #eef7ff, #e2f0fe);
+            border-color: #3399ff;
+            box-shadow: 0 6px 14px rgba(51, 153, 255, 0.25);
+            transform: translateY(-2px);
+            color: #0055aa;
+        }
+        
+        .back-button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Arrow icon (simple unicode left arrow) */
+        .back-button::before {
+            content: "←";
+            font-size: 1.3rem;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+        
+        .back-button:hover::before {
+            transform: translateX(-3px);
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -87,6 +151,7 @@
             object-fit: contain;
             display: block;
             margin: 0 auto;
+            filter: drop-shadow(0 6px 16px rgba(0, 64, 128, 0.1));
         }
         
         .image-caption {
@@ -96,6 +161,10 @@
             font-size: 1.2em;
             font-weight: 500;
             display: inline-block;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 6px 18px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
         }
         
         /* Symptoms Section */
@@ -270,6 +339,16 @@
         
         /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-bar {
+                padding: 8px 16px;
+            }
+            .back-button {
+                padding: 7px 20px;
+                font-size: 0.95rem;
+            }
+            .back-button::before {
+                font-size: 1.2rem;
+            }
             .container {
                 padding: 10px;
             }
@@ -317,12 +396,16 @@
             }
             
             .image-caption {
-                padding: 12px 20px;
+                padding: 8px 16px;
                 font-size: 1.1em;
             }
         }
         
         @media (max-width: 480px) {
+            .back-button {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
             .main-header h1 {
                 font-size: 1.9em;
             }
@@ -341,8 +424,8 @@
             }
             
             .image-caption {
-                padding: 10px 15px;
-                font-size: 1em;
+                padding: 6px 12px;
+                font-size: 0.95em;
             }
             
             .main-image {
@@ -352,6 +435,15 @@
     </style>
 </head>
 <body>
+
+    <!-- ========== TOP NAVIGATION BUTTON (Back to Home) ========== -->
+    <div class="nav-bar">
+        <div class="nav-container">
+            <!-- Back button linking to /index.html as requested -->
+            <a href="../index.html" class="back-button">Back to Home</a>
+        </div>
+    </div>
+    
     <div class="container">
         <!-- Header -->
         <div class="main-header">
